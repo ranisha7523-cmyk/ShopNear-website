@@ -792,10 +792,30 @@ img {
 }
 
 /* Responsive */
-/* Menu Card Overlay Zoom */
-.menu-card-item:hover .overlay-zoom {
-  opacity: 1 !important;
+/* Rich Animations & Glow Effects */
+.food-card {
+  animation: cardFadeIn 0.5s ease backwards;
 }
-.menu-card-item:hover img {
-  transform: scale(1.03);
+
+@keyframes cardFadeIn {
+  from { opacity: 0; transform: translateY(20px) scale(0.96); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.book-table-btn, .whatsapp-fab, .btn-primary-gold {
+  animation: buttonGlowPulse 3s infinite ease-in-out;
+}
+
+@keyframes buttonGlowPulse {
+  0%, 100% { box-shadow: 0 4px 16px rgba(245, 158, 11, 0.3); }
+  50% { box-shadow: 0 8px 28px rgba(245, 158, 11, 0.7); }
+}
+
+.hero-food-img {
+  animation: heroLogoFloat 4s infinite ease-in-out;
+}
+
+@keyframes heroLogoFloat {
+  0%, 100% { transform: translateY(0px) rotate(0deg); filter: drop-shadow(0 0 20px rgba(245,158,11,0.5)); }
+  50% { transform: translateY(-12px) rotate(1deg); filter: drop-shadow(0 0 35px rgba(245,158,11,0.8)); }
 }
