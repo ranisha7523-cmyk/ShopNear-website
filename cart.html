@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shopping Cart - ShopNear</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+
+  <!-- Main Header & Sub-Category Nav rendered by shared.js -->
+  <div id="mainHeader"></div>
+
+  <!-- Cart Main Section -->
+  <main class="main-wrapper">
+    <div id="cartViewContainer">
+      <!-- Rendered dynamically -->
+    </div>
+  </main>
+
+  <!-- Footer rendered by shared.js -->
+  <div id="mainFooter"></div>
+
+  <!-- Scripts -->
+  <script src="products-data.js"></script>
+  <script src="shared.js"></script>
+
+  <script>
+    let appliedCoupon = null;
+
+    function updateItemQty(productId, delta) {
+      let cart = getCart();
+      const idx = cart.findIndex(i => i.id === productId);
+      if (idx > -1) {
+        cart[idx].qty += delta;
+        if (cart[idx].qty <= 0) {
+          cart.splice(idx, 1);
+          showToast("Removed item from cart");
+        }
+        saveCart(cart);
+        renderCart();
+      }
+    }
+
+    function removeItem(productId) {
+      let cart = getCart();
+      cart = cart.filter(i => i.id !== productId);
+      saveCart(cart);
+      showToast("Removed item from cart");
+      renderCart();
+    }
+
+    function applyPromo() {
+      const codeInput = document.getElementById("promoInput");
+      if (!codeInput) return;
+      const code = codeInput.value.trim().toUpperCase();
+
+      if (!code) {
+        showToast("Please enter a coupon code");
+        return;
+      }
+
+      if (PROMO_CODES[code]) {
+        appliedCoupon = { code: code, ...PROMO_CODES[code] };
+        showToast(`Coupon "${code}" applied successfully! 🎉`);
+        renderCart();
+      } else {
+        showToast("Invalid promo coupon code!");
+      }
+    }
+
+    function removePromo() {
+      appliedCoupon = null;
+      showToast("Coupon removed");
+      renderCart();
+    }
+
+    function renderCart() {
+      const container = document.getElementById("cartViewContainer");
+      const cart = getCart();
+      const savedPin = localStorage.getItem("shopnear_pincode") || "110001";
+
+      if (cart.length === 0) {
+        container.innerHTML = `
+          <div style="background:var(--card-bg); border-radius:4px; padding:48px; text-align:center; box-shadow:var(--shadow-sm);">
+            <img src="https://static-assets-web.flixcart.com/fk-p-linchpin-web/fk-cp-zion/img/missing-cart_d4f708.png" width="180" style="margin:0 auto 24px auto" alt="Empty Cart">
+            <h3 style="font-size:20px; font-weight:700">Your cart is empty!</h3>
+            <p style="color:var(--text-secondary); margin-top:6px">Explore our catalog and add your favorite items.</p>
+            <a href="shop.html" class="place-order-btn" style="display:inline-block; width:auto; padding:12px 36px; margin-top:20px">SHOP NOW</a>
+          </div>
+        `;
+        return;
+      }
+
+      // Calculate totals
+      let totalMrp = 0;
+      let totalDiscountedPrice = 0;
+      let itemCount = 0;
+
+      const cartItemsHTML = cart.map(item => {
+        const product = PRODUCTS.find(p => p.id === item.id);
+        if (!product) return '';
+        
+        itemCount += item.qty;
+        totalMrp += product.originalPrice * item.qty;
+        totalDiscountedPrice += product.price * item.qty;
+
+        return `
+          <div class="cart-item-row">
+            <div>
+              <img src="${product.image}" alt="${product.name}">
+              <div class="cart-qty-ctrl">
+                <button class="qty-btn" onclick="updateItemQty('${product.id}', -1)">-</button>
+                <span class="qty-val">${item.qty}</span>
+                <button class="qty-btn" onclick="updateItemQty('${product.id}', 1)">+</button>
+              </div>
+            </div>
+
+            <div>
+              <div style="font-size:15px; font-weight:600; margin-bottom:4px">${product.name}</div>
+              <div style="font-size:12px; color:var(--text-secondary); margin-bottom:8px">Category: ${product.category} | Seller: ShopNear Retail</div>
+              
+              <div class="price-row" style="margin-bottom:12px">
+                <span class="current-price">${formatPrice(product.price * item.qty)}</span>
+                <span class="original-price">${formatPrice(product.originalPrice * item.qty)}</span>
+                <span class="discount-tag">${product.discount}% Off</span>
+              </div>
+
+              <div style="display:flex; gap:16px; font-size:13px; font-weight:700">
+                <button onclick="toggleWishlist('${product.id}'); removeItem('${product.id}');" style="background:none; color:var(--text-primary);">SAVE FOR LATER</button>
+                <button onclick="removeItem('${product.id}')" style="background:none; color:#ff3e6c;">REMOVE</button>
+              </div>
+            </div>
+
+            <div style="font-size:13px; text-align:right">
+              Delivery by <strong>Tomorrow, 11 AM</strong> | <span style="color:var(--discount-green)">FREE</span>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      const mappersDiscount = totalMrp - totalDiscountedPrice;
+      
+      // Coupon logic calculation
+      let couponSavings = 0;
+      if (appliedCoupon) {
+        if (totalDiscountedPrice >= (appliedCoupon.minCart || 0)) {
+          couponSavings = Math.min((totalDiscountedPrice * appliedCoupon.discountPercent) / 100, appliedCoupon.maxDiscount || 99999);
+        } else {
+          showToast(`Cart must be at least ${formatPrice(appliedCoupon.minCart)} for code ${appliedCoupon.code}`);
+          appliedCoupon = null;
+        }
+      }
+
+      const finalAmount = totalDiscountedPrice - couponSavings;
+      const netSavings = mappersDiscount + couponSavings;
+
+      container.innerHTML = `
+        <div class="cart-page-layout">
+          
+          <!-- Left Column: Items & Promo -->
+          <div>
+            <!-- Address Bar Header -->
+            <div style="background:var(--card-bg); padding:16px 20px; border-radius:4px; margin-bottom:12px; display:flex; justify-content:space-between; align-items:center; box-shadow:var(--shadow-sm)">
+              <div>
+                <span style="font-size:13px; color:var(--text-secondary)">Deliver to: </span>
+                <strong style="font-size:14px">New Delhi - ${savedPin}</strong>
+              </div>
+              <button onclick="window.location.href='product-detail.html'" style="background:none; color:var(--primary-blue); font-weight:700; font-size:13px">Change Pincode</button>
+            </div>
+
+            <!-- Cart Items List Card -->
+            <div class="cart-items-card">
+              <div style="padding:16px 20px; border-bottom:1px solid var(--border-color); font-weight:700; font-size:16px">
+                My Cart (${itemCount} items)
+              </div>
+
+              ${cartItemsHTML}
+            </div>
+
+            <!-- Promo Code Input Card -->
+            <div style="background:var(--card-bg); padding:16px 20px; border-radius:4px; margin-top:12px; box-shadow:var(--shadow-sm); display:flex; flex-direction:column; gap:8px">
+              <label style="font-size:13px; font-weight:700; color:var(--text-secondary)">HAVE A PROMO CODE?</label>
+              <div style="display:flex; gap:8px; max-width:400px">
+                <input type="text" id="promoInput" value="${appliedCoupon ? appliedCoupon.code : ''}" placeholder="Enter Code (e.g. SHOPNEAR20)" style="flex:1; padding:8px 12px; border:1px solid var(--border-color); border-radius:2px; font-size:14px; text-transform:uppercase">
+                ${appliedCoupon ? 
+                  `<button onclick="removePromo()" style="background:#ff3e6c; color:#fff; font-weight:700; padding:8px 16px; border-radius:2px">REMOVE</button>` :
+                  `<button onclick="applyPromo()" style="background:var(--primary-blue); color:#fff; font-weight:700; padding:8px 16px; border-radius:2px">APPLY</button>`
+                }
+              </div>
+              <div style="font-size:12px; color:var(--text-secondary)">Try codes: <strong>SHOPNEAR20</strong> (20% off), <strong>WELCOME10</strong> (10% off), <strong>AVENGERS20</strong> (15% off)</div>
+            </div>
+          </div>
+
+          <!-- Right Column: Price Breakdown Summary -->
+          <div class="cart-price-summary-card">
+            <div class="price-summary-header">PRICE DETAILS</div>
+
+            <div class="price-breakdown-row">
+              <span>Price (${itemCount} items)</span>
+              <span>${formatPrice(totalMrp)}</span>
+            </div>
+
+            <div class="price-breakdown-row">
+              <span>Discount</span>
+              <span style="color:var(--discount-green)">- ${formatPrice(mappersDiscount)}</span>
+            </div>
+
+            ${couponSavings > 0 ? `
+              <div class="price-breakdown-row">
+                <span>Coupon Discount (${appliedCoupon.code})</span>
+                <span style="color:var(--discount-green)">- ${formatPrice(couponSavings)}</span>
+              </div>
+            ` : ''}
+
+            <div class="price-breakdown-row">
+              <span>Delivery Charges</span>
+              <span style="color:var(--discount-green)">FREE</span>
+            </div>
+
+            <div class="price-breakdown-row total">
+              <span>Total Amount</span>
+              <span>${formatPrice(finalAmount)}</span>
+            </div>
+
+            <div class="savings-banner">
+              You will save ${formatPrice(netSavings)} on this order
+            </div>
+
+            <button class="place-order-btn" onclick="window.location.href='checkout.html'">PLACE ORDER</button>
+          </div>
+
+        </div>
+      `;
+    }
+
+    document.addEventListener('DOMContentLoaded', renderCart);
+  </script>
+</body>
+</html>

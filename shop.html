@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shop All Products - ShopNear Catalog</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+
+  <!-- Main Header & Sub-Category Nav rendered by shared.js -->
+  <div id="mainHeader"></div>
+
+  <!-- Catalog Wrapper -->
+  <main class="main-wrapper">
+    <div class="catalog-container">
+      
+      <!-- Flipkart Style Filter Sidebar -->
+      <aside class="filter-sidebar">
+        <div class="filter-header">
+          <h3>Filters</h3>
+          <button class="clear-filters-btn" onclick="clearAllFilters()">CLEAR ALL</button>
+        </div>
+
+        <!-- Category Filter -->
+        <div class="filter-group">
+          <div class="filter-group-title">CATEGORIES</div>
+          <div id="categoryFilterContainer">
+            <label class="filter-option"><input type="checkbox" value="Mobiles" class="cat-filter"> Mobiles</label>
+            <label class="filter-option"><input type="checkbox" value="Electronics" class="cat-filter"> Electronics</label>
+            <label class="filter-option"><input type="checkbox" value="Fashion" class="cat-filter"> Fashion</label>
+            <label class="filter-option"><input type="checkbox" value="Home & Kitchen" class="cat-filter"> Home & Kitchen</label>
+            <label class="filter-option"><input type="checkbox" value="Beauty & Toys" class="cat-filter"> Beauty & Toys</label>
+            <label class="filter-option" style="color:#ff3e6c; font-weight:700"><input type="checkbox" value="Avengers Special" class="cat-filter"> Avengers Special</label>
+          </div>
+        </div>
+
+        <!-- ShopNear Assured Quality Tag -->
+        <div class="filter-group">
+          <div class="filter-group-title">QUALITY</div>
+          <label class="filter-option">
+            <input type="checkbox" id="assuredFilter"> 
+            <span class="verified-badge" style="margin-left:0"><i class="fa-solid fa-circle-check"></i> Verified</span>
+          </label>
+        </div>
+
+        <!-- Price Range Slider -->
+        <div class="filter-group">
+          <div class="filter-group-title">MAX PRICE</div>
+          <div class="price-slider-wrap">
+            <input type="range" id="priceRange" min="500" max="150000" step="500" value="150000">
+            <div class="price-range-val" id="priceRangeLabel">Up to ₹1,50,000</div>
+          </div>
+        </div>
+
+        <!-- Minimum Rating Filter -->
+        <div class="filter-group">
+          <div class="filter-group-title">CUSTOMER RATINGS</div>
+          <label class="filter-option"><input type="radio" name="ratingFilter" value="4.5"> 4.5★ & above</label>
+          <label class="filter-option"><input type="radio" name="ratingFilter" value="4.0"> 4.0★ & above</label>
+          <label class="filter-option"><input type="radio" name="ratingFilter" value="0" checked> All Ratings</label>
+        </div>
+
+        <!-- Brand Filter -->
+        <div class="filter-group">
+          <div class="filter-group-title">BRAND</div>
+          <label class="filter-option"><input type="checkbox" value="Apple" class="brand-filter"> Apple</label>
+          <label class="filter-option"><input type="checkbox" value="Sony" class="brand-filter"> Sony</label>
+          <label class="filter-option"><input type="checkbox" value="Samsung" class="brand-filter"> Samsung</label>
+          <label class="filter-option"><input type="checkbox" value="Marvel" class="brand-filter"> Marvel</label>
+          <label class="filter-option"><input type="checkbox" value="Nike" class="brand-filter"> Nike</label>
+          <label class="filter-option"><input type="checkbox" value="Dell" class="brand-filter"> Dell</label>
+        </div>
+      </aside>
+
+      <!-- Main Catalog Display Area -->
+      <section class="catalog-content">
+        
+        <!-- Top Sort Bar -->
+        <div class="sort-bar">
+          <span class="sort-label">Sort By</span>
+          <span class="sort-option active" data-sort="relevance" onclick="setSort('relevance', this)">Relevance</span>
+          <span class="sort-option" data-sort="price-low" onclick="setSort('price-low', this)">Price -- Low to High</span>
+          <span class="sort-option" data-sort="price-high" onclick="setSort('price-high', this)">Price -- High to Low</span>
+          <span class="sort-option" data-sort="rating" onclick="setSort('rating', this)">Customer Rating</span>
+          <span class="sort-option" data-sort="discount" onclick="setSort('discount', this)">Discount</span>
+        </div>
+
+        <!-- Results Counter & Search Query Banner -->
+        <div id="catalogStatus" style="font-size:13px; font-weight:600; color:var(--text-secondary); margin-bottom:12px; padding:0 4px;"></div>
+
+        <!-- Products Grid -->
+        <div class="products-grid" id="catalogGrid">
+          <!-- Rendered dynamically -->
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Footer rendered by shared.js -->
+  <div id="mainFooter"></div>
+
+  <!-- Scripts -->
+  <script src="products-data.js"></script>
+  <script src="shared.js"></script>
+
+  <script>
+    let currentSort = 'relevance';
+
+    // Parse URL params on page load
+    const urlParams = new URLSearchParams(window.location.search);
+    const initialCategory = urlParams.get('category');
+    const initialSearch = urlParams.get('search');
+
+    if (initialCategory) {
+      document.querySelectorAll('.cat-filter').forEach(cb => {
+        if (cb.value.toLowerCase() === initialCategory.toLowerCase()) {
+          cb.checked = true;
+        }
+      });
+    }
+
+    // Event Listeners for Filters
+    document.querySelectorAll('.cat-filter, .brand-filter, #assuredFilter').forEach(el => {
+      el.addEventListener('change', renderCatalog);
+    });
+
+    document.querySelectorAll('input[name="ratingFilter"]').forEach(el => {
+      el.addEventListener('change', renderCatalog);
+    });
+
+    const priceSlider = document.getElementById('priceRange');
+    const priceLabel = document.getElementById('priceRangeLabel');
+
+    priceSlider.addEventListener('input', function() {
+      priceLabel.textContent = `Up to ${formatPrice(this.value)}`;
+      renderCatalog();
+    });
+
+    function clearAllFilters() {
+      document.querySelectorAll('.cat-filter, .brand-filter').forEach(cb => cb.checked = false);
+      document.getElementById('assuredFilter').checked = false;
+      priceSlider.value = 150000;
+      priceLabel.textContent = `Up to ${formatPrice(150000)}`;
+      document.querySelector('input[name="ratingFilter"][value="0"]').checked = true;
+      renderCatalog();
+    }
+
+    function setSort(sortType, el) {
+      currentSort = sortType;
+      document.querySelectorAll('.sort-option').forEach(s => s.classList.remove('active'));
+      el.classList.add('active');
+      renderCatalog();
+    }
+
+    function renderCatalog() {
+      let filtered = [...PRODUCTS];
+
+      // Search Query Filter
+      if (initialSearch) {
+        const q = initialSearch.toLowerCase();
+        filtered = filtered.filter(p => p.name.toLowerCase().includes(q) || p.category.toLowerCase().includes(q) || p.brand.toLowerCase().includes(q));
+      }
+
+      // Selected Categories
+      const selectedCats = Array.from(document.querySelectorAll('.cat-filter:checked')).map(cb => cb.value.toLowerCase());
+      if (selectedCats.length > 0) {
+        filtered = filtered.filter(p => selectedCats.includes(p.category.toLowerCase()));
+      }
+
+      // Selected Brands
+      const selectedBrands = Array.from(document.querySelectorAll('.brand-filter:checked')).map(cb => cb.value.toLowerCase());
+      if (selectedBrands.length > 0) {
+        filtered = filtered.filter(p => selectedBrands.includes(p.brand.toLowerCase()));
+      }
+
+      // ShopNear Assured
+      if (document.getElementById('assuredFilter').checked) {
+        filtered = filtered.filter(p => p.isAssured);
+      }
+
+      // Max Price
+      const maxPrice = Number(priceSlider.value);
+      filtered = filtered.filter(p => p.price <= maxPrice);
+
+      // Min Rating
+      const minRating = Number(document.querySelector('input[name="ratingFilter"]:checked').value);
+      if (minRating > 0) {
+        filtered = filtered.filter(p => p.rating >= minRating);
+      }
+
+      // Apply Sorting
+      if (currentSort === 'price-low') {
+        filtered.sort((a, b) => a.price - b.price);
+      } else if (currentSort === 'price-high') {
+        filtered.sort((a, b) => b.price - a.price);
+      } else if (currentSort === 'rating') {
+        filtered.sort((a, b) => b.rating - a.rating);
+      } else if (currentSort === 'discount') {
+        filtered.sort((a, b) => b.discount - a.discount);
+      }
+
+      // Status Counter Banner
+      const statusBanner = document.getElementById('catalogStatus');
+      let statusText = `Showing ${filtered.length} products`;
+      if (initialSearch) statusText += ` for "${initialSearch}"`;
+      statusBanner.textContent = statusText;
+
+      // Render Items
+      const grid = document.getElementById('catalogGrid');
+      if (filtered.length === 0) {
+        grid.innerHTML = `
+          <div style="grid-column: 1 / -1; text-align:center; padding: 48px; background:var(--card-bg); border-radius:4px">
+            <i class="fa-solid fa-box-open" style="font-size:48px; color:var(--text-secondary); margin-bottom:16px"></i>
+            <h3>No products found matching your filters</h3>
+            <p style="color:var(--text-secondary); margin-top:8px">Try clearing filters or searching for something else.</p>
+            <button onclick="clearAllFilters()" class="view-all-btn" style="margin-top:16px">CLEAR FILTERS</button>
+          </div>
+        `;
+        return;
+      }
+
+      const wishlist = getWishlist();
+
+      grid.innerHTML = filtered.map(product => {
+        const isWishlisted = wishlist.includes(product.id);
+        return `
+          <div class="product-card">
+            <button class="wishlist-heart-btn ${isWishlisted ? 'active' : ''}" data-id="${product.id}" onclick="event.stopPropagation(); toggleWishlist('${product.id}')">
+              <i class="fa-${isWishlisted ? 'solid' : 'regular'} fa-heart"></i>
+            </button>
+
+            <div class="product-img-wrap" onclick="window.location.href='product-detail.html?id=${product.id}'">
+              <img src="${product.image}" alt="${product.name}" loading="lazy">
+            </div>
+
+            <div class="product-title" onclick="window.location.href='product-detail.html?id=${product.id}'">
+              ${product.name}
+            </div>
+
+            <div class="rating-row">
+              <div class="rating-badge">${product.rating} <i class="fa-solid fa-star" style="font-size:10px"></i></div>
+              <div class="rating-count">(${product.ratingCount.toLocaleString()})</div>
+              ${product.isAssured ? `<span class="verified-badge"><i class="fa-solid fa-circle-check"></i> Verified</span>` : ''}
+            </div>
+
+            <div class="price-row">
+              <div class="current-price">${formatPrice(product.price)}</div>
+              <div class="original-price">${formatPrice(product.originalPrice)}</div>
+              <div class="discount-tag">${product.discount}% off</div>
+            </div>
+
+            <div class="card-actions">
+              <button class="add-cart-btn" onclick="addToCart('${product.id}')">ADD TO CART</button>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    document.addEventListener('DOMContentLoaded', renderCatalog);
+  </script>
+</body>
+</html>

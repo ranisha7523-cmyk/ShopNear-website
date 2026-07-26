@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product Details - ShopNear</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+
+  <!-- Main Header & Sub-Category Nav rendered by shared.js -->
+  <div id="mainHeader"></div>
+
+  <!-- Main Container -->
+  <main class="main-wrapper">
+    <div id="productDetailContainer">
+      <!-- Rendered dynamically -->
+    </div>
+  </main>
+
+  <!-- Footer rendered by shared.js -->
+  <div id="mainFooter"></div>
+
+  <!-- Scripts -->
+  <script src="products-data.js"></script>
+  <script src="shared.js"></script>
+
+  <script>
+    // Get Product ID from URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const productId = urlParams.get('id') || 'prod-1';
+    const product = PRODUCTS.find(p => p.id === productId) || PRODUCTS[0];
+
+    document.title = `${product.name} - ShopNear`;
+
+    function changeMainImage(src, thumbEl) {
+      document.getElementById('mainProductImg').src = src;
+      document.querySelectorAll('.thumb-img').forEach(t => t.classList.remove('active'));
+      thumbEl.classList.add('active');
+    }
+
+    function checkPincode() {
+      const pin = document.getElementById('pincodeInput').value.trim();
+      const statusDiv = document.getElementById('pincodeStatus');
+      if (/^\d{6}$/.test(pin)) {
+        statusDiv.innerHTML = `<span style="color:var(--rating-green); font-weight:700"><i class="fa-solid fa-truck-fast"></i> Delivery by Tomorrow, 11:00 AM | Free Shipping</span>`;
+        localStorage.setItem("shopnear_pincode", pin);
+      } else {
+        statusDiv.innerHTML = `<span style="color:#ff3e6c; font-weight:600"><i class="fa-solid fa-circle-exclamation"></i> Please enter a valid 6-digit Pincode</span>`;
+      }
+    }
+
+    function buyNow(prodId) {
+      addToCart(prodId, 1);
+      window.location.href = 'checkout.html';
+    }
+
+    function renderProductDetails() {
+      const container = document.getElementById('productDetailContainer');
+      const savedPin = localStorage.getItem("shopnear_pincode") || "110001";
+      const wishlist = getWishlist();
+      const isWishlisted = wishlist.includes(product.id);
+
+      const specsRows = Object.entries(product.specs || {}).map(([key, val]) => `
+        <tr>
+          <td class="spec-key">${key}</td>
+          <td class="spec-val">${val}</td>
+        </tr>
+      `).join('');
+
+      const offersHTML = (product.offers || []).map(o => `
+        <div class="offer-item">
+          <i class="fa-solid fa-tag"></i> <span>${o}</span>
+        </div>
+      `).join('');
+
+      const reviewsHTML = (product.reviews || []).map(r => `
+        <div style="border-bottom:1px solid var(--border-color); padding-bottom:12px; margin-bottom:12px">
+          <div style="display:flex; align-items:center; gap:8px; margin-bottom:4px">
+            <span class="rating-badge">${r.rating} <i class="fa-solid fa-star" style="font-size:10px"></i></span>
+            <strong style="font-size:14px">${r.user}</strong>
+            <span style="font-size:12px; color:var(--text-secondary); margin-left:auto">${r.date}</span>
+          </div>
+          <p style="font-size:13px; color:var(--text-primary)">${r.comment}</p>
+        </div>
+      `).join('');
+
+      container.innerHTML = `
+        <div class="product-detail-card">
+          
+          <!-- Left Column: Gallery & Action Buttons -->
+          <div class="detail-gallery">
+            <div class="main-preview-img">
+              <img id="mainProductImg" src="${product.image}" alt="${product.name}">
+            </div>
+
+            <!-- Thumbnail Selector -->
+            <div class="thumbs-row">
+              ${(product.images || [product.image]).map((imgSrc, idx) => `
+                <img src="${imgSrc}" class="thumb-img ${idx === 0 ? 'active' : ''}" onclick="changeMainImage('${imgSrc}', this)" alt="thumb">
+              `).join('')}
+            </div>
+
+            <!-- Flipkart Sticky Action Buttons -->
+            <div class="detail-sticky-buttons">
+              <button class="btn-add-cart" onclick="addToCart('${product.id}')">
+                <i class="fa-solid fa-cart-shopping"></i> ADD TO CART
+              </button>
+              <button class="btn-buy-now" onclick="buyNow('${product.id}')">
+                <i class="fa-solid fa-bolt"></i> BUY NOW
+              </button>
+            </div>
+          </div>
+
+          <!-- Right Column: Details & Specs -->
+          <div class="detail-info">
+            
+            <!-- Breadcrumbs -->
+            <div style="font-size:12px; color:var(--text-secondary);">
+              Home > ${product.category} > ${product.brand} > <span style="color:var(--text-primary)">${product.name.substring(0, 30)}...</span>
+            </div>
+
+            <!-- Title & Rating -->
+            <h1 class="detail-title">${product.name}</h1>
+            
+            <div class="rating-row">
+              <span class="rating-badge">${product.rating} <i class="fa-solid fa-star" style="font-size:10px"></i></span>
+              <span class="rating-count" style="font-weight:600">${product.ratingCount.toLocaleString()} Ratings & ${product.reviewCount.toLocaleString()} Reviews</span>
+              ${product.isAssured ? `<span class="verified-badge"><i class="fa-solid fa-circle-check"></i> Verified</span>` : ''}
+              <button class="wishlist-heart-btn ${isWishlisted ? 'active' : ''}" style="position:static; margin-left:auto" onclick="toggleWishlist('${product.id}')">
+                <i class="fa-${isWishlisted ? 'solid' : 'regular'} fa-heart"></i>
+              </button>
+            </div>
+
+            <!-- Price Breakdown -->
+            <div class="detail-price-box">
+              <span class="detail-current-price">${formatPrice(product.price)}</span>
+              <span class="original-price" style="font-size:16px">${formatPrice(product.originalPrice)}</span>
+              <span class="discount-tag" style="font-size:18px">${product.discount}% off</span>
+            </div>
+
+            <!-- Available Bank Offers -->
+            <div class="detail-offers-list">
+              <div style="font-size:13px; font-weight:700; color:var(--text-primary)"><i class="fa-solid fa-circle-percent" style="color:var(--rating-green)"></i> Available Offers</div>
+              ${offersHTML}
+            </div>
+
+            <!-- Delivery Pincode Checker -->
+            <div style="margin-top:8px">
+              <label style="font-size:13px; font-weight:700; color:var(--text-secondary); display:block">DELIVERY OPTIONS</label>
+              <div class="pincode-checker">
+                <input type="text" id="pincodeInput" value="${savedPin}" maxlength="6" placeholder="Enter 6-digit Pincode">
+                <button type="button" onclick="checkPincode()">Check</button>
+              </div>
+              <div id="pincodeStatus" style="font-size:13px; margin-top:6px">
+                <span style="color:var(--rating-green); font-weight:700"><i class="fa-solid fa-truck-fast"></i> Delivery by Tomorrow, 11:00 AM | Free Shipping</span>
+              </div>
+            </div>
+
+            <!-- Product Description -->
+            <div style="margin-top:12px">
+              <h4 style="font-size:14px; font-weight:700; margin-bottom:6px">Product Description</h4>
+              <p style="font-size:14px; color:var(--text-primary); line-height:1.6">${product.description}</p>
+            </div>
+
+            <!-- Specifications Table -->
+            <div style="margin-top:16px">
+              <h4 style="font-size:14px; font-weight:700; margin-bottom:8px">Specifications</h4>
+              <table class="specs-table">
+                <tbody>
+                  ${specsRows}
+                </tbody>
+              </table>
+            </div>
+
+            <!-- Reviews Section -->
+            <div style="margin-top:20px">
+              <h4 style="font-size:16px; font-weight:700; margin-bottom:12px">Ratings & Customer Reviews</h4>
+              <div>
+                ${reviewsHTML}
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      `;
+    }
+
+    document.addEventListener('DOMContentLoaded', renderProductDetails);
+  </script>
+</body>
+</html>

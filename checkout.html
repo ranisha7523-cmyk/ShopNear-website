@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checkout - ShopNear</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+
+  <!-- Main Header & Sub-Category Nav rendered by shared.js -->
+  <div id="mainHeader"></div>
+
+  <!-- Checkout Container -->
+  <main class="main-wrapper">
+    <div class="cart-page-layout">
+      
+      <!-- Left 4-Step Accordion Form -->
+      <div class="checkout-accordion">
+        
+        <!-- Step 1: Login -->
+        <div class="checkout-step-card">
+          <div class="step-title">
+            <span class="step-num">1</span> LOGIN DETAILS <i class="fa-solid fa-circle-check" style="color:var(--rating-green); margin-left:auto"></i>
+          </div>
+          <div class="step-content" style="display:flex; justify-content:space-between; align-items:center">
+            <div>
+              <strong style="font-size:14px">Rahul Sharma</strong> <span style="color:var(--text-secondary); font-size:13px">+91 9876543210</span>
+            </div>
+            <button onclick="openLoginModal()" style="background:none; color:var(--primary-blue); font-weight:700; font-size:13px">Change</button>
+          </div>
+        </div>
+
+        <!-- Step 2: Delivery Address -->
+        <div class="checkout-step-card active">
+          <div class="step-title">
+            <span class="step-num">2</span> DELIVERY ADDRESS
+          </div>
+          <div class="step-content">
+            <form id="addressForm" onsubmit="event.preventDefault(); proceedToPayment();">
+              <div class="form-grid">
+                <div class="form-group">
+                  <label>Full Name *</label>
+                  <input type="text" id="custName" value="Rahul Sharma" required>
+                </div>
+                <div class="form-group">
+                  <label>10-digit Phone Number *</label>
+                  <input type="text" id="custPhone" value="9876543210" required>
+                </div>
+                <div class="form-group">
+                  <label>Pincode *</label>
+                  <input type="text" id="custPincode" value="110001" required>
+                </div>
+                <div class="form-group">
+                  <label>Locality / Area *</label>
+                  <input type="text" id="custLocality" value="Connaught Place" required>
+                </div>
+                <div class="form-group full-width">
+                  <label>Address (House No, Building, Street) *</label>
+                  <textarea id="custAddress" rows="2" required>Flat 402, Block B, Regal Building</textarea>
+                </div>
+                <div class="form-group">
+                  <label>City / District *</label>
+                  <input type="text" id="custCity" value="New Delhi" required>
+                </div>
+                <div class="form-group">
+                  <label>State *</label>
+                  <input type="text" id="custState" value="Delhi" required>
+                </div>
+                <div class="form-group full-width">
+                  <label>Address Type</label>
+                  <div style="display:flex; gap:16px; margin-top:4px">
+                    <label style="font-size:13px"><input type="radio" name="addrType" value="Home" checked> Home (All day delivery)</label>
+                    <label style="font-size:13px"><input type="radio" name="addrType" value="Work"> Work (Delivery between 10 AM - 6 PM)</label>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <!-- Step 3: Order Summary -->
+        <div class="checkout-step-card">
+          <div class="step-title">
+            <span class="step-num">3</span> ORDER SUMMARY
+          </div>
+          <div class="step-content" id="orderSummaryList">
+            <!-- Items rendered dynamically -->
+          </div>
+        </div>
+
+        <!-- Step 4: Payment Options -->
+        <div class="checkout-step-card active">
+          <div class="step-title">
+            <span class="step-num">4</span> PAYMENT OPTIONS
+          </div>
+          <div class="step-content">
+            <div class="payment-options">
+              <label class="payment-option-box">
+                <input type="radio" name="paymentMethod" value="UPI" checked>
+                <i class="fa-solid fa-qrcode" style="color:var(--primary-blue); font-size:20px"></i>
+                <div>
+                  <div>UPI (Google Pay / PhonePe / Paytm)</div>
+                  <div style="font-size:12px; color:var(--text-secondary)">Pay instantly using any UPI app</div>
+                </div>
+              </label>
+
+              <label class="payment-option-box">
+                <input type="radio" name="paymentMethod" value="Card">
+                <i class="fa-regular fa-credit-card" style="color:var(--action-orange); font-size:20px"></i>
+                <div>
+                  <div>Credit / Debit / ATM Card</div>
+                  <div style="font-size:12px; color:var(--text-secondary)">Visa, MasterCard, RuPay, Maestro</div>
+                </div>
+              </label>
+
+              <label class="payment-option-box">
+                <input type="radio" name="paymentMethod" value="NetBanking">
+                <i class="fa-solid fa-building-columns" style="color:var(--rating-green); font-size:20px"></i>
+                <div>
+                  <div>Net Banking</div>
+                  <div style="font-size:12px; color:var(--text-secondary)">HDFC, ICICI, SBI, Axis & more</div>
+                </div>
+              </label>
+
+              <label class="payment-option-box">
+                <input type="radio" name="paymentMethod" value="COD">
+                <i class="fa-solid fa-money-bill-1-wave" style="color:#ff9f00; font-size:20px"></i>
+                <div>
+                  <div>Cash on Delivery</div>
+                  <div style="font-size:12px; color:var(--text-secondary)">Pay cash when your order is delivered</div>
+                </div>
+              </label>
+            </div>
+            
+            <button class="place-order-btn" style="margin-top:20px" onclick="confirmOrder()">CONFIRM & PLACE ORDER</button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Right Column: Price Details -->
+      <div class="cart-price-summary-card" id="checkoutPriceSummary">
+        <!-- Rendered dynamically -->
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Footer rendered by shared.js -->
+  <div id="mainFooter"></div>
+
+  <!-- Scripts -->
+  <script src="products-data.js"></script>
+  <script src="shared.js"></script>
+
+  <script>
+    function confirmOrder() {
+      const name = document.getElementById("custName").value.trim();
+      const phone = document.getElementById("custPhone").value.trim();
+      const address = document.getElementById("custAddress").value.trim();
+
+      if (!name || !phone || !address) {
+        showToast("Please complete your delivery address details");
+        return;
+      }
+
+      const orderId = "SN-" + Math.floor(100000 + Math.random() * 900000);
+      const cart = getCart();
+
+      if (cart.length === 0) {
+        showToast("Your cart is empty!");
+        return;
+      }
+
+      // Empty Cart & Wishlist storage
+      localStorage.removeItem("shopnear_cart");
+      updateBadges();
+
+      // Render Celebratory Success Modal
+      const modal = document.createElement("div");
+      modal.style.cssText = "position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.75); z-index:9999; display:flex; align-items:center; justify-content:center;";
+      modal.innerHTML = `
+        <div style="background:var(--card-bg); width:90%; max-width:480px; border-radius:12px; padding:32px; text-align:center; box-shadow:0 12px 40px rgba(0,0,0,0.4); animation:slideUp 0.4s ease;">
+          <div style="font-size:64px; color:var(--rating-green); margin-bottom:12px">🎉</div>
+          <h2 style="font-size:24px; font-weight:800; color:var(--primary-blue)">Order Placed Successfully!</h2>
+          <p style="font-size:14px; color:var(--text-secondary); margin-top:4px">Thank you for shopping with ShopNear!</p>
+          
+          <div style="background:#f8fafc; border:1px dashed var(--border-color); padding:16px; border-radius:8px; margin:20px 0; text-align:left; font-size:13px">
+            <div style="display:flex; justify-content:space-between; margin-bottom:6px">
+              <span>Order ID:</span>
+              <strong style="color:var(--text-primary)">${orderId}</strong>
+            </div>
+            <div style="display:flex; justify-content:space-between; margin-bottom:6px">
+              <span>Estimated Delivery:</span>
+              <strong style="color:var(--rating-green)">Tomorrow, 11:00 AM</strong>
+            </div>
+            <div style="display:flex; justify-content:space-between">
+              <span>Delivery Address:</span>
+              <strong style="color:var(--text-primary)">${name}, ${address}</strong>
+            </div>
+          </div>
+
+          <div style="display:flex; gap:12px; justify-content:center">
+            <a href="index.html" class="place-order-btn" style="text-align:center">CONTINUE SHOPPING</a>
+          </div>
+        </div>
+      `;
+      document.body.appendChild(modal);
+    }
+
+    function renderCheckoutSummary() {
+      const cart = getCart();
+      const listContainer = document.getElementById("orderSummaryList");
+      const priceContainer = document.getElementById("checkoutPriceSummary");
+
+      let totalMrp = 0;
+      let totalDiscountedPrice = 0;
+      let itemCount = 0;
+
+      listContainer.innerHTML = cart.map(item => {
+        const p = PRODUCTS.find(prod => prod.id === item.id);
+        if (!p) return '';
+        itemCount += item.qty;
+        totalMrp += p.originalPrice * item.qty;
+        totalDiscountedPrice += p.price * item.qty;
+
+        return `
+          <div style="display:flex; gap:12px; align-items:center; padding:10px 0; border-bottom:1px solid var(--border-color)">
+            <img src="${p.image}" width="50" height="50" style="object-fit:contain">
+            <div style="flex:1">
+              <div style="font-size:13px; font-weight:600">${p.name}</div>
+              <div style="font-size:12px; color:var(--text-secondary)">Qty: ${item.qty} × ${formatPrice(p.price)}</div>
+            </div>
+            <div style="font-weight:700; font-size:14px">${formatPrice(p.price * item.qty)}</div>
+          </div>
+        `;
+      }).join('');
+
+      const totalSavings = totalMrp - totalDiscountedPrice;
+
+      priceContainer.innerHTML = `
+        <div class="price-summary-header">PRICE DETAILS</div>
+        <div class="price-breakdown-row">
+          <span>Price (${itemCount} items)</span>
+          <span>${formatPrice(totalMrp)}</span>
+        </div>
+        <div class="price-breakdown-row">
+          <span>Discount</span>
+          <span style="color:var(--discount-green)">- ${formatPrice(totalSavings)}</span>
+        </div>
+        <div class="price-breakdown-row">
+          <span>Delivery Charges</span>
+          <span style="color:var(--discount-green)">FREE</span>
+        </div>
+        <div class="price-breakdown-row total">
+          <span>Total Payable</span>
+          <span>${formatPrice(totalDiscountedPrice)}</span>
+        </div>
+        <div class="savings-banner">
+          Your Total Savings: ${formatPrice(totalSavings)}
+        </div>
+      `;
+    }
+
+    document.addEventListener('DOMContentLoaded', renderCheckoutSummary);
+  </script>
+</body>
+</html>
