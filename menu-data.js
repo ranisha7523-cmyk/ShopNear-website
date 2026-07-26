@@ -1,4 +1,4 @@
-// The Shahi Dosa - Official Menu Dataset (HD Menu Verified)
+// The Shahi Dosa - Official Menu Dataset (Real Dishes Verified)
 const RESTAURANT_INFO = {
   name: "The Shahi Dosa",
   tagline: "Royal Taste, Memorable Every Time",
@@ -32,7 +32,7 @@ const MENU_ITEMS = [
     price: 69,
     isVeg: true,
     isPopular: false,
-    image: "https://images.unsplash.com/photo-1668236543090-82eba5ee5976?auto=format&fit=crop&w=600&q=80",
+    image: "dish-dosa-real.jpg",
     description: "Classic golden crispy crepe served with authentic Coconut Chutney, Tomato Chutney & Sambhar."
   },
   {
@@ -42,7 +42,7 @@ const MENU_ITEMS = [
     price: 109,
     isVeg: true,
     isPopular: true,
-    image: "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?auto=format&fit=crop&w=600&q=80",
+    image: "dish-dosa-real.jpg",
     description: "Crispy Dosa stuffed with traditional spiced potato & onion masala filling."
   },
   {
@@ -52,7 +52,7 @@ const MENU_ITEMS = [
     price: 119,
     isVeg: true,
     isPopular: true,
-    image: "https://images.unsplash.com/photo-1668236543090-82eba5ee5976?auto=format&fit=crop&w=600&q=80",
+    image: "dish-dosa-real.jpg",
     description: "Indo-Chinese fusion Dosa layered with fiery Schezwan sauce and potato masala."
   },
   {
@@ -62,7 +62,7 @@ const MENU_ITEMS = [
     price: 119,
     isVeg: true,
     isPopular: true,
-    image: "https://images.unsplash.com/photo-1668236543090-82eba5ee5976?auto=format&fit=crop&w=600&q=80",
+    image: "dish-dosa-real.jpg",
     description: "Crispy Dosa lined with fiery Mysore red garlic paste & potato masala."
   },
   {
@@ -72,7 +72,7 @@ const MENU_ITEMS = [
     price: 139,
     isVeg: true,
     isPopular: true,
-    image: "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?auto=format&fit=crop&w=600&q=80",
+    image: "dish-dosa-real.jpg",
     description: "Stuffed with rich grated cottage cheese masala and Indian spices."
   },
   {
@@ -82,7 +82,7 @@ const MENU_ITEMS = [
     price: 139,
     isVeg: true,
     isPopular: false,
-    image: "https://images.unsplash.com/photo-1668236543090-82eba5ee5976?auto=format&fit=crop&w=600&q=80",
+    image: "dish-dosa-real.jpg",
     description: "Combination of spicy Mysore chutney paste & rich Paneer filling."
   },
   {
@@ -92,7 +92,7 @@ const MENU_ITEMS = [
     price: 139,
     isVeg: true,
     isPopular: false,
-    image: "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?auto=format&fit=crop&w=600&q=80",
+    image: "dish-dosa-real.jpg",
     description: "Fiery Schezwan kick paired with soft paneer chunks inside a golden Dosa."
   },
   {
@@ -102,7 +102,7 @@ const MENU_ITEMS = [
     price: 159,
     isVeg: true,
     isPopular: true,
-    image: "https://images.unsplash.com/photo-1668236543090-82eba5ee5976?auto=format&fit=crop&w=600&q=80",
+    image: "dish-dosa-real.jpg",
     description: "Loaded with melted mozzarella cheese & spiced paneer chunks."
   },
   {
@@ -112,7 +112,7 @@ const MENU_ITEMS = [
     price: 129,
     isVeg: true,
     isPopular: false,
-    image: "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?auto=format&fit=crop&w=600&q=80",
+    image: "dish-dosa-real.jpg",
     description: "Net-textured ultra-crispy Semolina (Rawa) Dosa infused with peppercorns & cumin."
   },
   {
@@ -122,7 +122,7 @@ const MENU_ITEMS = [
     price: 139,
     isVeg: true,
     isPopular: true,
-    image: "https://images.unsplash.com/photo-1668236543090-82eba5ee5976?auto=format&fit=crop&w=600&q=80",
+    image: "dish-dosa-real.jpg",
     description: "Crispy Rawa Dosa stuffed with flavorful potato masala."
   },
   {
@@ -132,7 +132,7 @@ const MENU_ITEMS = [
     price: 149,
     isVeg: true,
     isPopular: false,
-    image: "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?auto=format&fit=crop&w=600&q=80",
+    image: "dish-dosa-real.jpg",
     description: "Lacy Rawa Dosa stuffed with generous spiced paneer filling."
   },
   {
@@ -142,7 +142,7 @@ const MENU_ITEMS = [
     price: 159,
     isVeg: true,
     isPopular: true,
-    image: "https://images.unsplash.com/photo-1668236543090-82eba5ee5976?auto=format&fit=crop&w=600&q=80",
+    image: "dish-dosa-real.jpg",
     description: "The ultimate Rawa Dosa loaded with gooey melted cheese & seasoned paneer."
   },
 
@@ -154,7 +154,7 @@ const MENU_ITEMS = [
     price: 89,
     isVeg: true,
     isPopular: false,
-    image: "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?auto=format&fit=crop&w=600&q=80",
+    image: "dish-uttapam-real.jpg",
     description: "Thick soft fermented rice pancake cooked till golden, served with Sambhar & Chutneys."
   },
   {
@@ -164,7 +164,7 @@ const MENU_ITEMS = [
     price: 109,
     isVeg: true,
     isPopular: true,
-    image: "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?auto=format&fit=crop&w=600&q=80",
+    image: "dish-uttapam-real.jpg",
     description: "Soft Uttapam studded with finely chopped caramelized onions & coriander."
   },
   {
@@ -174,7 +174,7 @@ const MENU_ITEMS = [
     price: 109,
     isVeg: true,
     isPopular: false,
-    image: "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?auto=format&fit=crop&w=600&q=80",
+    image: "dish-uttapam-real.jpg",
     description: "Topped with juicy ripe tomatoes and herbs."
   },
   {
@@ -184,7 +184,7 @@ const MENU_ITEMS = [
     price: 109,
     isVeg: true,
     isPopular: true,
-    image: "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?auto=format&fit=crop&w=600&q=80",
+    image: "dish-uttapam-real.jpg",
     description: "Colorful toppings of bell peppers, onions, tomatoes & green chillies."
   },
   {
@@ -194,7 +194,7 @@ const MENU_ITEMS = [
     price: 139,
     isVeg: true,
     isPopular: true,
-    image: "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?auto=format&fit=crop&w=600&q=80",
+    image: "dish-uttapam-real.jpg",
     description: "Topped generously with fresh paneer cubes and mild spices."
   },
   {
@@ -204,7 +204,7 @@ const MENU_ITEMS = [
     price: 149,
     isVeg: true,
     isPopular: true,
-    image: "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?auto=format&fit=crop&w=600&q=80",
+    image: "dish-uttapam-real.jpg",
     description: "Decadent Uttapam loaded with melted cheese and paneer cubes."
   },
 
@@ -216,7 +216,7 @@ const MENU_ITEMS = [
     price: 79,
     isVeg: true,
     isPopular: true,
-    image: "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?auto=format&fit=crop&w=600&q=80",
+    image: "dish-idli-real.jpg",
     description: "Super soft steamed rice cakes served with piping hot Sambhar & coconut chutney."
   },
   {
@@ -226,7 +226,7 @@ const MENU_ITEMS = [
     price: 89,
     isVeg: true,
     isPopular: true,
-    image: "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?auto=format&fit=crop&w=600&q=80",
+    image: "dish-idli-real.jpg",
     description: "Crispy fried lentil donuts soaked in hot Sambhar."
   },
   {
@@ -236,7 +236,7 @@ const MENU_ITEMS = [
     price: 99,
     isVeg: true,
     isPopular: true,
-    image: "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?auto=format&fit=crop&w=600&q=80",
+    image: "dish-idli-real.jpg",
     description: "Soft idlis tossed in pure desi ghee and roasted spicy Gunpowder (Podi) masala."
   },
 
@@ -248,7 +248,7 @@ const MENU_ITEMS = [
     price: 89,
     isVeg: true,
     isPopular: true,
-    image: "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?auto=format&fit=crop&w=600&q=80",
+    image: "dish-idli-real.jpg",
     description: "2 Soft Idlis + 2 Crispy Medu Vadas served with Sambhar & Chutneys."
   },
   {
@@ -258,7 +258,7 @@ const MENU_ITEMS = [
     price: 180,
     isVeg: true,
     isPopular: true,
-    image: "https://images.unsplash.com/photo-1668236543090-82eba5ee5976?auto=format&fit=crop&w=600&q=80",
+    image: "dish-dosa-real.jpg",
     description: "Royal Feast Combo: 2 Idlis, 2 Vadas and 1 Golden Masala Dosa."
   },
 
@@ -314,7 +314,7 @@ const MENU_ITEMS = [
     price: 99,
     isVeg: true,
     isPopular: true,
-    image: "https://images.unsplash.com/photo-1626777552726-4a6b54c97e46?auto=format&fit=crop&w=600&q=80",
+    image: "dish-chole-bhature-real.jpg",
     description: "Fluffy balloon Bhatura served with spicy Punjabi Chole gravy, onions & pickle."
   },
   {
@@ -344,7 +344,7 @@ const MENU_ITEMS = [
     price: 99,
     isVeg: true,
     isPopular: true,
-    image: "https://images.unsplash.com/photo-1626777552726-4a6b54c97e46?auto=format&fit=crop&w=600&q=80",
+    image: "dish-chole-bhature-real.jpg",
     description: "6 Crispy fried Puris served with spicy Chole & cooling Raita."
   },
 
