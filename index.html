@@ -3,739 +3,252 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ShopNear - Online Shopping Site for Mobiles, Electronics, Fashion, Home & More</title>
-  <meta name="description" content="ShopNear Online Shopping Store. Explore top deals on Mobiles, Electronics, Fashion, Marvel Avengers Collectibles, Home Appliances, and more.">
+  <title>The Shahi Dosa - 100% Pure Veg Royal South Indian & Gourmet Fusion Dining</title>
+  <meta name="description" content="The Shahi Dosa Restaurant. Royal Taste, Memorable Every Time. Authentic South Indian Dosas, Uttapams, Idlis, Gourmet Combos & North Indian Delicacies. 100% Pure Veg.">
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-
-  <style>
-    /* ==================== HERO CINEMATIC SECTION ==================== */
-    .hero-cinematic {
-      position: relative;
-      width: 100%;
-      min-height: 420px;
-      overflow: hidden;
-      border-radius: 12px;
-      margin-bottom: 20px;
-      background: #000;
-    }
-
-    /* Animated Gradient Background - Cinematic Video Feel */
-    .hero-bg-canvas {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(135deg, #1a0533, #2d0a6e, #1a2a8a, #0f4c9e);
-      background-size: 400% 400%;
-      animation: gradientShift 8s ease infinite;
-      z-index: 0;
-    }
-
-    @keyframes gradientShift {
-      0%   { background-position: 0% 50%; }
-      50%  { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-
-    /* Floating Orbs / Light Beams */
-    .hero-orb {
-      position: absolute;
-      border-radius: 50%;
-      filter: blur(60px);
-      opacity: 0.6;
-      animation: orbFloat 6s ease-in-out infinite;
-      z-index: 1;
-    }
-    .hero-orb.orb1 { width: 300px; height: 300px; background: rgba(109,40,217,0.8); top: -80px; left: -60px; animation-duration: 7s; }
-    .hero-orb.orb2 { width: 250px; height: 250px; background: rgba(37,99,235,0.7); top: 30px; right: -40px; animation-duration: 9s; animation-delay: 2s; }
-    .hero-orb.orb3 { width: 180px; height: 180px; background: rgba(192,38,211,0.5); bottom: -50px; left: 40%; animation-duration: 5s; animation-delay: 1s; }
-
-    @keyframes orbFloat {
-      0%, 100% { transform: translateY(0px) scale(1); }
-      50%       { transform: translateY(-30px) scale(1.1); }
-    }
-
-    /* Particle Stars */
-    .star-particle {
-      position: absolute;
-      width: 3px;
-      height: 3px;
-      background: white;
-      border-radius: 50%;
-      animation: twinkle 3s ease-in-out infinite;
-      z-index: 2;
-    }
-    @keyframes twinkle {
-      0%, 100% { opacity: 0.2; transform: scale(1); }
-      50%       { opacity: 1; transform: scale(1.5); }
-    }
-
-    /* Slides */
-    .hero-cinematic-slides {
-      position: relative;
-      z-index: 10;
-      display: flex;
-      align-items: center;
-      min-height: 420px;
-      padding: 40px 60px;
-    }
-
-    .cine-slide {
-      display: none;
-      width: 100%;
-      align-items: center;
-      justify-content: space-between;
-      gap: 32px;
-      animation: slideIn 0.7s ease forwards;
-    }
-    .cine-slide.active { display: flex; }
-
-    @keyframes slideIn {
-      from { opacity: 0; transform: translateX(40px); }
-      to   { opacity: 1; transform: translateX(0); }
-    }
-
-    .cine-content { flex: 1; color: #fff; }
-
-    .cine-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      background: rgba(255,255,255,0.15);
-      backdrop-filter: blur(8px);
-      border: 1px solid rgba(255,255,255,0.25);
-      color: #fff;
-      font-size: 12px;
-      font-weight: 700;
-      padding: 6px 14px;
-      border-radius: 30px;
-      margin-bottom: 18px;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      animation: badgePulse 2s ease infinite;
-    }
-    @keyframes badgePulse {
-      0%, 100% { box-shadow: 0 0 0 0 rgba(255,255,255,0.2); }
-      50%       { box-shadow: 0 0 0 8px rgba(255,255,255,0); }
-    }
-
-    .cine-title {
-      font-size: 40px;
-      font-weight: 900;
-      line-height: 1.15;
-      margin-bottom: 12px;
-      text-shadow: 0 2px 20px rgba(0,0,0,0.4);
-      background: linear-gradient(135deg, #ffffff 60%, #c4b5fd);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    .cine-sub {
-      font-size: 15px;
-      color: rgba(255,255,255,0.8);
-      margin-bottom: 24px;
-      line-height: 1.6;
-    }
-
-    .cine-cta {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: linear-gradient(135deg, #7c3aed, #2563eb);
-      color: #fff;
-      font-weight: 800;
-      font-size: 14px;
-      padding: 13px 28px;
-      border-radius: 30px;
-      border: none;
-      cursor: pointer;
-      text-decoration: none;
-      box-shadow: 0 6px 24px rgba(124,58,237,0.5);
-      transition: all 0.3s ease;
-      animation: ctaGlow 3s ease infinite;
-    }
-    @keyframes ctaGlow {
-      0%, 100% { box-shadow: 0 6px 24px rgba(124,58,237,0.4); }
-      50%       { box-shadow: 0 6px 36px rgba(124,58,237,0.8); }
-    }
-    .cine-cta:hover { transform: scale(1.05); }
-
-    /* Right side animated graphic */
-    .cine-graphic {
-      width: 280px;
-      height: 280px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 120px;
-      filter: drop-shadow(0 10px 40px rgba(109,40,217,0.6));
-      animation: floatGraphic 4s ease-in-out infinite;
-      flex-shrink: 0;
-    }
-    @keyframes floatGraphic {
-      0%, 100% { transform: translateY(0px) rotate(-3deg); }
-      50%       { transform: translateY(-20px) rotate(3deg); }
-    }
-
-    /* Slide Indicators */
-    .cine-dots {
-      position: absolute;
-      bottom: 18px;
-      left: 60px;
-      display: flex;
-      gap: 8px;
-      z-index: 20;
-    }
-    .cine-dot {
-      width: 8px; height: 8px;
-      border-radius: 50%;
-      background: rgba(255,255,255,0.4);
-      cursor: pointer;
-      transition: all 0.3s;
-    }
-    .cine-dot.active { background: #fff; width: 24px; border-radius: 10px; }
-
-    /* Slide counter */
-    .cine-counter {
-      position: absolute;
-      bottom: 18px;
-      right: 60px;
-      color: rgba(255,255,255,0.6);
-      font-size: 13px;
-      font-weight: 700;
-      z-index: 20;
-    }
-
-    /* ==================== SAWAN SPECIAL SECTION ==================== */
-    .sawan-section {
-      position: relative;
-      overflow: hidden;
-      border-radius: 12px;
-      margin-bottom: 20px;
-      background: linear-gradient(135deg, #0d4f2e, #065f46, #14532d, #1a6b3a);
-      background-size: 200% 200%;
-      animation: sawnGradient 6s ease infinite;
-    }
-
-    @keyframes sawnGradient {
-      0%, 100% { background-position: 0% 50%; }
-      50%       { background-position: 100% 50%; }
-    }
-
-    /* Rain Drops Animation */
-    .rain-container {
-      position: absolute;
-      inset: 0;
-      overflow: hidden;
-      pointer-events: none;
-      z-index: 1;
-    }
-
-    .rain-drop {
-      position: absolute;
-      top: -20px;
-      width: 2px;
-      background: linear-gradient(to bottom, transparent, rgba(147,210,255,0.7));
-      border-radius: 2px;
-      animation: rainFall linear infinite;
-    }
-
-    @keyframes rainFall {
-      0%   { transform: translateY(-20px); opacity: 0; }
-      10%  { opacity: 1; }
-      90%  { opacity: 1; }
-      100% { transform: translateY(450px); opacity: 0; }
-    }
-
-    /* Floating Lotus / Petals */
-    .sawan-petal {
-      position: absolute;
-      font-size: 22px;
-      animation: petalFloat linear infinite;
-      z-index: 2;
-      pointer-events: none;
-    }
-    @keyframes petalFloat {
-      0%   { transform: translateY(-40px) rotate(0deg); opacity: 0; }
-      10%  { opacity: 1; }
-      90%  { opacity: 1; }
-      100% { transform: translateY(460px) rotate(720deg); opacity: 0; }
-    }
-
-    .sawan-header {
-      position: relative;
-      z-index: 10;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 20px 24px;
-      border-bottom: 1px solid rgba(255,255,255,0.15);
-    }
-
-    .sawan-title-block { display: flex; align-items: center; gap: 12px; }
-
-    .sawan-main-title {
-      font-size: 22px;
-      font-weight: 800;
-      color: #fff;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .sawan-subtitle {
-      font-size: 13px;
-      color: rgba(255,255,255,0.7);
-      margin-top: 2px;
-    }
-
-    .sawan-coupon-tag {
-      background: rgba(255,255,255,0.15);
-      backdrop-filter: blur(8px);
-      border: 1px solid rgba(255,255,255,0.3);
-      color: #fff;
-      padding: 6px 14px;
-      border-radius: 20px;
-      font-size: 12px;
-      font-weight: 800;
-      animation: badgePulse 2s ease infinite;
-    }
-
-    .sawan-grid {
-      position: relative;
-      z-index: 10;
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-      gap: 16px;
-      padding: 16px 24px 24px;
-    }
-
-    .sawan-card {
-      background: rgba(255,255,255,0.1);
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(255,255,255,0.2);
-      border-radius: 8px;
-      padding: 14px;
-      color: #fff;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      position: relative;
-      overflow: hidden;
-    }
-    .sawan-card::before {
-      content: '';
-      position: absolute;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
-      background: radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 60%);
-      transform: rotate(45deg);
-      transition: all 0.5s ease;
-      opacity: 0;
-    }
-    .sawan-card:hover { transform: translateY(-6px); box-shadow: 0 12px 32px rgba(0,0,0,0.3); }
-    .sawan-card:hover::before { opacity: 1; }
-
-    .sawan-card-img {
-      width: 100%;
-      height: 160px;
-      object-fit: contain;
-      margin-bottom: 10px;
-      border-radius: 4px;
-      filter: drop-shadow(0 4px 12px rgba(0,0,0,0.3));
-    }
-
-    .sawan-card-title {
-      font-size: 13px;
-      font-weight: 600;
-      margin-bottom: 6px;
-      display: -webkit-box;
-      -webkit-line-clamp: 2;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-    }
-
-    .sawan-card-price {
-      font-size: 16px;
-      font-weight: 800;
-      color: #86efac;
-    }
-
-    .sawan-card-discount {
-      font-size: 12px;
-      color: #fcd34d;
-      font-weight: 700;
-    }
-
-    .sawan-card-btn {
-      margin-top: 10px;
-      background: rgba(255,255,255,0.2);
-      color: #fff;
-      font-weight: 700;
-      font-size: 12px;
-      padding: 7px;
-      border-radius: 4px;
-      width: 100%;
-      border: 1px solid rgba(255,255,255,0.3);
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-    .sawan-card-btn:hover { background: rgba(255,255,255,0.35); }
-
-    /* ==================== SECTION CARD SCROLL ANIMATIONS ==================== */
-    .section-card {
-      opacity: 1;
-      transform: translateY(0);
-      transition: opacity 0.6s ease, transform 0.6s ease;
-    }
-
-    /* Product Card Stagger */
-    .product-card {
-      opacity: 1;
-      transform: translateY(0);
-      transition: opacity 0.4s ease, transform 0.4s ease, box-shadow 0.2s ease, border-color 0.2s ease;
-    }
-
-    @media (max-width: 768px) {
-      .hero-cinematic-slides { padding: 28px 20px; }
-      .cine-title { font-size: 26px; }
-      .cine-graphic { width: 120px; height: 120px; font-size: 70px; }
-      .cine-dots { left: 20px; }
-      .cine-counter { right: 20px; }
-    }
-  </style>
 </head>
 <body>
 
-  <!-- Dynamic Main Header & Sub-Category Nav rendered by shared.js -->
-  <div id="mainHeader"></div>
-
-  <!-- Page Main Content -->
-  <main class="main-wrapper">
-
-    <!-- ======== CINEMATIC HERO SECTION (Video-style animated) ======== -->
-    <div class="hero-cinematic" id="heroCinematic">
-
-      <!-- Animated Background -->
-      <div class="hero-bg-canvas"></div>
-
-      <!-- Glowing Orbs -->
-      <div class="hero-orb orb1"></div>
-      <div class="hero-orb orb2"></div>
-      <div class="hero-orb orb3"></div>
-
-      <!-- Star Particles (JS generated) -->
-      <div id="starContainer"></div>
-
-      <!-- Slides -->
-      <div class="hero-cinematic-slides">
-
-        <!-- Slide 1: Smartphones -->
-        <div class="cine-slide active" id="cineSlide0">
-          <div class="cine-content">
-            <div class="cine-badge"><i class="fa-solid fa-bolt"></i> Big Billion Sale Live</div>
-            <div class="cine-title">Flagship Smartphones<br>Up to 40% OFF</div>
-            <div class="cine-sub">Get instant 10% discount on HDFC & SBI Bank Cards.<br>No Cost EMI available.</div>
-            <a href="shop.html?category=Mobiles" class="cine-cta"><i class="fa-solid fa-mobile-screen-button"></i> SHOP SMARTPHONES</a>
-          </div>
-          <div class="cine-graphic">📱</div>
+  <!-- Sticky Glassmorphic Header -->
+  <header class="shahi-header">
+    <div class="header-container">
+      <div class="brand-block">
+        <div class="brand-icon">🪷</div>
+        <div class="brand-text">
+          <h1>The शाही Dosa</h1>
+          <span>Royal Taste • Memorable Every Time</span>
         </div>
-
-        <!-- Slide 2: Avengers -->
-        <div class="cine-slide" id="cineSlide1">
-          <div class="cine-content">
-            <div class="cine-badge" style="background:rgba(255,62,108,0.3); border-color:rgba(255,62,108,0.5)">
-              <i class="fa-solid fa-shield-halved"></i> Avengers Collectors Edition
-            </div>
-            <div class="cine-title" style="background: linear-gradient(135deg, #fff 60%, #fca5a5); -webkit-background-clip:text; background-clip:text;">
-              Iron Man Arc Reactor &<br>Cap's Shield Replicas
-            </div>
-            <div class="cine-sub">Extra 15% OFF with promo code <strong style="color:#fca5a5">AVENGERS20</strong></div>
-            <a href="shop.html?category=Avengers+Special" class="cine-cta" style="background:linear-gradient(135deg,#dc2626,#9f1239)">
-              <i class="fa-solid fa-shield-halved"></i> EXPLORE MERCH
-            </a>
-          </div>
-          <div class="cine-graphic">🛡️</div>
-        </div>
-
-        <!-- Slide 3: Sawan Special -->
-        <div class="cine-slide" id="cineSlide2">
-          <div class="cine-content">
-            <div class="cine-badge" style="background:rgba(34,197,94,0.3); border-color:rgba(34,197,94,0.5)">
-              <i class="fa-solid fa-cloud-rain"></i> Sawan Mahotsav 2026
-            </div>
-            <div class="cine-title" style="background: linear-gradient(135deg, #fff 40%, #86efac); -webkit-background-clip:text; background-clip:text;">
-              Sawan Special Sale!<br>Sacred Collection Inside
-            </div>
-            <div class="cine-sub">Puja Thali, Ethnic Wear & more. Extra 30% off with <strong style="color:#86efac">SAWAN30</strong></div>
-            <a href="#sawanSection" class="cine-cta" style="background:linear-gradient(135deg,#16a34a,#166534)">
-              <i class="fa-solid fa-om"></i> EXPLORE SAWAN SALE
-            </a>
-          </div>
-          <div class="cine-graphic">🌧️</div>
-        </div>
-
-        <!-- Slide 4: Aroma & Home -->
-        <div class="cine-slide" id="cineSlide3">
-          <div class="cine-content">
-            <div class="cine-badge" style="background:rgba(168,85,247,0.3); border-color:rgba(168,85,247,0.5)">
-              <i class="fa-solid fa-spray-can-sparkles"></i> Home & Aromatherapy
-            </div>
-            <div class="cine-title" style="background: linear-gradient(135deg, #fff 50%, #d8b4fe); -webkit-background-clip:text; background-clip:text;">
-              Essential Oil Diffusers &<br>Smart Lighting
-            </div>
-            <div class="cine-sub">Transform your living space with Stitch & Aroma spa collections.</div>
-            <a href="shop.html?category=Home+%26+Kitchen" class="cine-cta" style="background:linear-gradient(135deg,#7c3aed,#6d28d9)">
-              <i class="fa-solid fa-leaf"></i> DISCOVER MORE
-            </a>
-          </div>
-          <div class="cine-graphic">🌿</div>
-        </div>
-
+        <span class="pure-veg-tag">🟢 100% PURE VEG</span>
       </div>
 
-      <!-- Dots & Counter -->
-      <div class="cine-dots" id="cineDots">
-        <div class="cine-dot active" onclick="setCineSlide(0)"></div>
-        <div class="cine-dot" onclick="setCineSlide(1)"></div>
-        <div class="cine-dot" onclick="setCineSlide(2)"></div>
-        <div class="cine-dot" onclick="setCineSlide(3)"></div>
+      <nav class="header-nav">
+        <a href="#hero" class="nav-link active">Home</a>
+        <a href="#menu" class="nav-link">Royal Menu</a>
+        <a href="#menuCard" class="nav-link">Original Menu Card</a>
+        <a href="#reviews" class="nav-link">Google Reviews</a>
+        <a href="#booking" class="nav-link">Book a Table</a>
+        <a href="#contact" class="nav-link">Contact</a>
+      </nav>
+
+      <div class="header-actions">
+        <button class="cart-icon-btn" onclick="openOrderDrawer()" title="View Order Cart">
+          <i class="fa-solid fa-basket-shopping"></i>
+          <span class="cart-badge" style="display:none">0</span>
+        </button>
+
+        <a href="#booking" class="book-table-btn">
+          <i class="fa-regular fa-calendar-check"></i> BOOK A TABLE
+        </a>
       </div>
-      <div class="cine-counter" id="cineCounter">1 / 4</div>
     </div>
+  </header>
 
-    <!-- ======== SAWAN SPECIAL SECTION ======== -->
-    <div class="sawan-section section-card" id="sawanSection">
+  <main>
 
-      <!-- Animated Rain -->
-      <div class="rain-container" id="rainContainer"></div>
+    <!-- Hero Banner Section -->
+    <section class="hero-wrapper" id="hero">
+      <div class="hero-glow-bg"></div>
 
-      <!-- Sawan Header -->
-      <div class="sawan-header">
-        <div class="sawan-title-block">
-          <div>
-            <div class="sawan-main-title">
-              🌧️ Sawan Special Collection
-              <span style="font-size:14px; font-weight:500; color:rgba(255,255,255,0.7)">| सावन महोत्सव 2026</span>
-            </div>
-            <div class="sawan-subtitle">Celebrating the sacred month of Sawan with exclusive deals on Puja & Ethnic items</div>
+      <div class="hero-content">
+        <div class="hero-text-side">
+          <div class="hero-badge-row">
+            <span class="hero-badge-item"><i class="fa-solid fa-star" style="color:var(--gold-accent)"></i> 4.9★ Google Rating</span>
+            <span class="hero-badge-item"><i class="fa-solid fa-leaf" style="color:var(--veg-green)"></i> 100% Pure Veg</span>
+          </div>
+
+          <h2>Experience Royal Taste in Every Bite</h2>
+          <p>Indulge in our golden crispy Dosas, fluffy Uttapams, spicy Podi Ghee Idlis, and royal gourmet combos prepared with hand-ground spices and traditional batter.</p>
+
+          <div class="hero-actions">
+            <a href="#menu" class="btn-primary-gold"><i class="fa-solid fa-utensils"></i> EXPLORE MENU</a>
+            <button onclick="openOrderDrawer()" class="btn-outline-gold"><i class="fa-solid fa-bag-shopping"></i> ORDER ONLINE</button>
           </div>
         </div>
+
+        <div class="hero-img-side">
+          <img src="https://images.unsplash.com/photo-1668236543090-82eba5ee5976?auto=format&fit=crop&w=600&q=80" class="hero-food-img" alt="The Shahi Dosa Special">
+        </div>
+      </div>
+    </section>
+
+    <!-- Client's Original Menu Card View Section -->
+    <section id="menuCard" style="max-width:1280px; margin:40px auto; padding:0 24px;">
+      <div class="section-title-wrap">
+        <p>AUTHENTIC RESTAURANT MENU</p>
+        <h2>Original Shahi Dosa Menu Card</h2>
+      </div>
+
+      <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap:24px;">
+        <div style="background:var(--card-bg); border:1px solid var(--card-border); border-radius:12px; padding:16px; text-align:center;">
+          <img src="https://images.gemini.google.com/attachment/1.jpg" alt="The Shahi Dosa Red Royal Menu" style="border-radius:8px; width:100%; height:auto; box-shadow:0 8px 24px rgba(0,0,0,0.5)">
+          <div style="font-weight:700; color:var(--gold-accent); margin-top:12px">Royal Shahi Menu (Red Edition)</div>
+        </div>
+
+        <div style="background:var(--card-bg); border:1px solid var(--card-border); border-radius:12px; padding:16px; text-align:center;">
+          <img src="https://images.gemini.google.com/attachment/4.jpg" alt="The Shahi Dosa Black Gold Menu" style="border-radius:8px; width:100%; height:auto; box-shadow:0 8px 24px rgba(0,0,0,0.5)">
+          <div style="font-weight:700; color:var(--gold-accent); margin-top:12px">Shahi Premium Menu (Gold Edition)</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Interactive Food Menu Catalog Section -->
+    <section class="menu-section" id="menu">
+      <div class="section-title-wrap">
+        <p>OUR CULINARY DELIGHTS</p>
+        <h2>The Shahi Interactive Menu</h2>
+      </div>
+
+      <!-- Search Bar -->
+      <div style="max-width:500px; margin:0 auto 24px auto; position:relative">
+        <input type="text" id="menuSearchInput" placeholder="Search for Dosa, Uttapam, Idli, Chole Bhature..." style="width:100%; padding:14px 20px 14px 44px; background:var(--card-bg); border:1px solid var(--card-border); border-radius:30px; color:#fff; outline:none; font-size:14px">
+        <i class="fa-solid fa-magnifying-glass" style="position:absolute; left:18px; top:50%; transform:translateY(-50%); color:var(--gold-accent)"></i>
+      </div>
+
+      <!-- Category Filter Pills -->
+      <div class="menu-filter-bar" id="categoryPills">
+        <!-- Rendered dynamically -->
+      </div>
+
+      <!-- Menu Grid -->
+      <div class="menu-grid" id="menuGrid">
+        <!-- Rendered dynamically -->
+      </div>
+    </section>
+
+    <!-- Google Map Reviews Section -->
+    <section class="reviews-wrapper" id="reviews">
+      <div class="section-title-wrap">
+        <p>WHAT OUR GUESTS SAY</p>
+        <h2>Google Map 5-Star Reviews</h2>
+      </div>
+
+      <div class="reviews-grid" id="googleReviewsGrid">
+        <!-- Rendered dynamically -->
+      </div>
+    </section>
+
+    <!-- Table Booking Section -->
+    <section class="menu-section" id="booking">
+      <div class="booking-section">
+        <div class="section-title-wrap" style="margin-bottom:16px">
+          <p>RESERVE A ROYAL TABLE</p>
+          <h2>Book Your Table Online</h2>
+        </div>
+
+        <form id="bookingForm" onsubmit="submitTableBooking(event)" class="booking-form">
+          <div class="form-group-custom">
+            <label>Your Name *</label>
+            <input type="text" id="bookName" placeholder="Rohan Sharma" required>
+          </div>
+
+          <div class="form-group-custom">
+            <label>Phone Number *</label>
+            <input type="tel" id="bookPhone" placeholder="+91 9876543210" required>
+          </div>
+
+          <div class="form-group-custom">
+            <label>Date *</label>
+            <input type="date" id="bookDate" required>
+          </div>
+
+          <div class="form-group-custom">
+            <label>Time Slot *</label>
+            <select id="bookTime" required>
+              <option value="12:00 PM">12:00 PM (Lunch)</option>
+              <option value="01:30 PM">01:30 PM (Lunch)</option>
+              <option value="07:00 PM">07:00 PM (Dinner)</option>
+              <option value="08:30 PM">08:30 PM (Dinner)</option>
+              <option value="09:30 PM">09:30 PM (Dinner)</option>
+            </select>
+          </div>
+
+          <div class="form-group-custom">
+            <label>Number of Guests *</label>
+            <select id="bookGuests" required>
+              <option value="2 Guests">2 Guests</option>
+              <option value="4 Guests">4 Guests</option>
+              <option value="6 Guests">6 Guests</option>
+              <option value="8+ Large Family">8+ Large Family</option>
+            </select>
+          </div>
+
+          <div class="form-group-custom">
+            <label>Special Occasion / Notes</label>
+            <input type="text" id="bookNotes" placeholder="Birthday celebration, high chair needed, etc.">
+          </div>
+
+          <div class="form-group-custom full-width">
+            <button type="submit" class="btn-primary-gold" style="width:100%; justify-content:center; padding:14px">CONFIRM TABLE RESERVATION</button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- Location & Contact Section -->
+    <section class="menu-section" id="contact" style="margin-bottom:60px">
+      <div class="section-title-wrap">
+        <p>VISIT US</p>
+        <h2>Location & Opening Hours</h2>
+      </div>
+
+      <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap:24px; background:var(--card-bg); border:1px solid var(--card-border); border-radius:16px; padding:32px">
         <div>
-          <div class="sawan-coupon-tag">🎫 Use Code: SAWAN30 | Extra 30% OFF</div>
+          <h3 style="color:var(--gold-accent); font-size:20px; margin-bottom:12px"><i class="fa-solid fa-location-dot"></i> Restaurant Address</h3>
+          <p style="color:var(--text-muted); font-size:14px; margin-bottom:16px">Shop No. 12, Royal Food Street, Main Market, Delhi</p>
+
+          <h3 style="color:var(--gold-accent); font-size:20px; margin-bottom:12px"><i class="fa-regular fa-clock"></i> Opening Hours</h3>
+          <p style="color:var(--text-muted); font-size:14px; margin-bottom:16px">Monday - Sunday: 8:00 AM - 11:00 PM</p>
+
+          <h3 style="color:var(--gold-accent); font-size:20px; margin-bottom:12px"><i class="fa-solid fa-phone"></i> Phone / Delivery Inquiry</h3>
+          <p style="color:var(--text-muted); font-size:14px">+91 9876543210</p>
+        </div>
+
+        <div style="border-radius:12px; overflow:hidden; min-height:220px; border:1px solid var(--card-border)">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3501.8845878848417!2d77.21950431508264!3d28.63321588241829!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390cfd37b741d057%3A0xcdee88e47393c3f1!2sConnaught%20Place%2C%20New%20Delhi!5e0!3m2!1sen!2sin!4v1625000000000!5m2!1sen!2sin" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
         </div>
       </div>
-
-      <!-- Sawan Products Grid -->
-      <div class="sawan-grid" id="sawanGrid">
-        <!-- Rendered dynamically by JS -->
-      </div>
-    </div>
-
-    <!-- ======== DEALS OF THE DAY ======== -->
-    <div class="section-card">
-      <div class="section-header">
-        <div class="section-title">
-          <i class="fa-solid fa-fire" style="color: #fb641b;"></i> Deals of the Day
-          <div class="countdown-timer">
-            <i class="fa-regular fa-clock"></i> Ends in <span id="dealTimer">14h : 22m : 45s</span>
-          </div>
-        </div>
-        <a href="shop.html" class="view-all-btn">VIEW ALL DEALS</a>
-      </div>
-      <div class="products-grid" id="dealsGrid"></div>
-    </div>
-
-    <!-- ======== ELECTRONICS SECTION ======== -->
-    <div class="section-card">
-      <div class="section-header">
-        <div class="section-title">
-          <i class="fa-solid fa-laptop" style="color: var(--primary-blue);"></i> Best of Electronics & Audio
-        </div>
-        <a href="shop.html?category=Electronics" class="view-all-btn">VIEW ALL</a>
-      </div>
-      <div class="products-grid" id="electronicsGrid"></div>
-    </div>
-
-    <!-- ======== AVENGERS SECTION ======== -->
-    <div class="section-card" style="border: 2px solid rgba(255, 62, 108, 0.2);">
-      <div class="section-header" style="background: linear-gradient(90deg, rgba(255,62,108,0.08) 0%, rgba(109,40,217,0.08) 100%);">
-        <div class="section-title" style="color: #ff3e6c;">
-          <i class="fa-solid fa-shield-halved"></i> Avengers Special Collection
-        </div>
-        <a href="shop.html?category=Avengers+Special" class="view-all-btn" style="background: #ff3e6c;">EXPLORE ALL</a>
-      </div>
-      <div class="products-grid" id="avengersGrid"></div>
-    </div>
+    </section>
 
   </main>
 
-  <!-- Footer rendered by shared.js -->
-  <div id="mainFooter"></div>
+  <!-- Slide-Over Order Drawer Modal -->
+  <div class="order-drawer-backdrop" id="orderDrawerBackdrop" onclick="if(event.target===this) closeOrderDrawer()">
+    <div class="order-drawer">
+      <div class="drawer-header">
+        <h3><i class="fa-solid fa-bag-shopping" style="color:var(--gold-accent)"></i> Your Shahi Order</h3>
+        <button onclick="closeOrderDrawer()" style="background:none; color:#fff; font-size:20px"><i class="fa-solid fa-xmark"></i></button>
+      </div>
 
-  <!-- Shared Scripts & Data -->
-  <script src="products-data.js"></script>
-  <script src="shared.js"></script>
+      <div class="drawer-body" id="drawerOrderList">
+        <!-- Rendered dynamically -->
+      </div>
 
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      /* ===================== CINEMATIC HERO SLIDER ===================== */
-      let cineIndex = 0;
-      const cineSlides = document.querySelectorAll('.cine-slide');
-      const cineDots   = document.querySelectorAll('.cine-dot');
-      const cineCounter = document.getElementById('cineCounter');
-
-      window.setCineSlide = function(idx) {
-        if (!cineSlides || cineSlides.length === 0) return;
-        cineSlides.forEach(s => s.classList.remove('active'));
-        cineDots.forEach(d => d.classList.remove('active'));
-        cineIndex = idx % cineSlides.length;
-        if (cineSlides[cineIndex]) cineSlides[cineIndex].classList.add('active');
-        if (cineDots[cineIndex]) cineDots[cineIndex].classList.add('active');
-        if (cineCounter) cineCounter.textContent = `${cineIndex + 1} / ${cineSlides.length}`;
-      };
-
-      if (cineSlides && cineSlides.length > 0) {
-        setInterval(() => {
-          setCineSlide((cineIndex + 1) % cineSlides.length);
-        }, 5000);
-      }
-
-      /* ===================== STAR PARTICLES ===================== */
-      const starContainer = document.getElementById('starContainer');
-      if (starContainer) {
-        for (let i = 0; i < 30; i++) {
-          const star = document.createElement('div');
-          star.className = 'star-particle';
-          star.style.left = Math.random() * 100 + '%';
-          star.style.top  = Math.random() * 100 + '%';
-          star.style.animationDuration = (2 + Math.random() * 3) + 's';
-          star.style.animationDelay   = (Math.random() * 3) + 's';
-          star.style.width = star.style.height = (Math.random() < 0.3 ? 4 : 2) + 'px';
-          starContainer.appendChild(star);
-        }
-      }
-
-      /* ===================== RAIN ANIMATION ===================== */
-      const rainContainer = document.getElementById('rainContainer');
-      if (rainContainer) {
-        for (let i = 0; i < 30; i++) {
-          const drop = document.createElement('div');
-          drop.className = 'rain-drop';
-          drop.style.left = Math.random() * 100 + '%';
-          drop.style.height = (15 + Math.random() * 25) + 'px';
-          drop.style.animationDuration = (0.6 + Math.random() * 0.8) + 's';
-          drop.style.animationDelay   = (Math.random() * 2) + 's';
-          rainContainer.appendChild(drop);
-        }
-
-        const sawanSymbols = ['🍃', '🌿', '🪷', '💧', '🌸', '🍀'];
-        for (let i = 0; i < 8; i++) {
-          const petal = document.createElement('div');
-          petal.className = 'sawan-petal';
-          petal.textContent = sawanSymbols[Math.floor(Math.random() * sawanSymbols.length)];
-          petal.style.left = Math.random() * 100 + '%';
-          petal.style.animationDuration = (4 + Math.random() * 5) + 's';
-          petal.style.animationDelay   = (Math.random() * 4) + 's';
-          petal.style.fontSize = (14 + Math.random() * 12) + 'px';
-          rainContainer.appendChild(petal);
-        }
-      }
-
-      /* ===================== DEALS COUNTDOWN TIMER ===================== */
-      let totalSeconds = 14 * 3600 + 22 * 60 + 45;
-      const timerEl = document.getElementById('dealTimer');
-      if (timerEl) {
-        setInterval(() => {
-          if (totalSeconds > 0) {
-            totalSeconds--;
-            const h = Math.floor(totalSeconds / 3600);
-            const m = Math.floor((totalSeconds % 3600) / 60);
-            const s = totalSeconds % 60;
-            timerEl.textContent = `${h}h : ${m < 10 ? '0' + m : m}m : ${s < 10 ? '0' + s : s}s`;
-          }
-        }, 1000);
-      }
-
-      /* ===================== POPULATE GRIDS ===================== */
-      if (typeof PRODUCTS !== 'undefined' && Array.isArray(PRODUCTS)) {
-        // Sawan
-        const sawanGrid = document.getElementById('sawanGrid');
-        if (sawanGrid) {
-          const sawanProducts = PRODUCTS.filter(p => p.category === 'Sawan Special');
-          sawanGrid.innerHTML = sawanProducts.length > 0
-            ? sawanProducts.map(createSawanCardHTML).join('')
-            : '<div style="color:#86efac; padding:20px; font-size:14px">More Sawan special products coming soon! 🌿</div>';
-        }
-
-        // Deals of the Day (top 4 by discount)
-        const dealsGrid = document.getElementById('dealsGrid');
-        if (dealsGrid) {
-          const deals = [...PRODUCTS].sort((a, b) => b.discount - a.discount).slice(0, 4);
-          dealsGrid.innerHTML = deals.map(createProductCardHTML).join('');
-        }
-
-        // Electronics
-        const electronicsGrid = document.getElementById('electronicsGrid');
-        if (electronicsGrid) {
-          const electronics = PRODUCTS.filter(p => p.category === 'Electronics' || p.category === 'Mobiles').slice(0, 4);
-          electronicsGrid.innerHTML = electronics.map(createProductCardHTML).join('');
-        }
-
-        // Avengers
-        const avengersGrid = document.getElementById('avengersGrid');
-        if (avengersGrid) {
-          const avengers = PRODUCTS.filter(p => p.category === 'Avengers Special');
-          avengersGrid.innerHTML = avengers.map(createProductCardHTML).join('');
-        }
-      }
-    });
-
-    /* ===================== PRODUCT CARD RENDERER ===================== */
-    function createProductCardHTML(product) {
-      const wishlist = typeof getWishlist === 'function' ? getWishlist() : [];
-      const isWishlisted = wishlist.includes(product.id);
-      return `
-        <div class="product-card">
-          <button class="wishlist-heart-btn ${isWishlisted ? 'active' : ''}" data-id="${product.id}" onclick="event.stopPropagation(); toggleWishlist('${product.id}')">
-            <i class="fa-${isWishlisted ? 'solid' : 'regular'} fa-heart"></i>
-          </button>
-          <div class="product-img-wrap" onclick="window.location.href='product-detail.html?id=${product.id}'">
-            <img src="${product.image}" alt="${product.name}" loading="lazy">
-          </div>
-          <div class="product-title" onclick="window.location.href='product-detail.html?id=${product.id}'">${product.name}</div>
-          <div class="rating-row">
-            <div class="rating-badge">${product.rating} <i class="fa-solid fa-star" style="font-size:10px"></i></div>
-            <div class="rating-count">(${product.ratingCount ? product.ratingCount.toLocaleString() : 0})</div>
-            ${product.isAssured ? `<span class="verified-badge"><i class="fa-solid fa-circle-check"></i> Verified</span>` : ''}
-          </div>
-          <div class="price-row">
-            <div class="current-price">${typeof formatPrice === 'function' ? formatPrice(product.price) : '₹' + product.price}</div>
-            <div class="original-price">${typeof formatPrice === 'function' ? formatPrice(product.originalPrice) : '₹' + product.originalPrice}</div>
-            <div class="discount-tag">${product.discount}% off</div>
-          </div>
-          <div class="card-actions">
-            <button class="add-cart-btn" onclick="addToCart('${product.id}')">ADD TO CART</button>
-          </div>
+      <div class="drawer-footer">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px">
+          <span style="font-size:15px; font-weight:700; color:var(--text-muted)">Total Amount:</span>
+          <span style="font-size:24px; font-weight:900; color:var(--gold-accent)" id="drawerOrderTotal">₹0</span>
         </div>
-      `;
-    }
 
-    /* ===================== SAWAN CARD RENDERER ===================== */
-    function createSawanCardHTML(product) {
-      return `
-        <div class="sawan-card" onclick="window.location.href='product-detail.html?id=${product.id}'">
-          <img class="sawan-card-img" src="${product.image}" alt="${product.name}">
-          <div class="sawan-card-title">${product.name}</div>
-          <div class="sawan-card-price">${typeof formatPrice === 'function' ? formatPrice(product.price) : '₹' + product.price}</div>
-          <div class="sawan-card-discount">${product.discount}% off | Use SAWAN30 for extra 30%</div>
-          <button class="sawan-card-btn" onclick="event.stopPropagation(); addToCart('${product.id}')">
-            <i class="fa-solid fa-cart-shopping"></i> ADD TO CART
-          </button>
-        </div>
-      `;
-    }
-  </script>
+        <button onclick="sendWhatsAppOrder()" class="whatsapp-order-btn">
+          <i class="fa-brands fa-whatsapp"></i> SEND ORDER ON WHATSAPP
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Floating WhatsApp FAB -->
+  <a href="https://wa.me/919876543210?text=Hi%20The%20Shahi%20Dosa,%20I%20want%20to%20place%20an%20order!" target="_blank" class="whatsapp-fab" title="Chat on WhatsApp">
+    <i class="fa-brands fa-whatsapp"></i>
+  </a>
+
+  <!-- Footer -->
+  <footer class="shahi-footer">
+    <p>© 2026 The Shahi Dosa Restaurant. 100% Pure Veg • All Rights Reserved.</p>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="menu-data.js"></script>
+  <script src="app.js"></script>
 </body>
 </html>
