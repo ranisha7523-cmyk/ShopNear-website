@@ -92,7 +92,7 @@ function renderMenu() {
   grid.innerHTML = items.map(item => `
     <div class="food-card">
       <div class="food-img-box">
-        <img src="${item.image}" alt="${item.name}" loading="lazy">
+        <img src="${item.image}" alt="${item.name}" loading="lazy" onerror="this.onerror=null; this.src='dish-dosa-real.jpg';">
         ${item.isPopular ? `<span class="food-popular-badge"><i class="fa-solid fa-crown"></i> Chef Special</span>` : ''}
       </div>
 
