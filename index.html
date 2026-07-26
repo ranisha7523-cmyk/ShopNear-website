@@ -831,6 +831,64 @@
       </div>
     </section>
 
+    <!-- Official Restaurant Menu Card Showcase Section -->
+    <section id="officialMenuCard" style="max-width:1280px; margin:50px auto; padding:0 24px;">
+      <div class="section-title-wrap">
+        <p>AUTHENTIC RESTAURANT MENU</p>
+        <h2>Official Shahi Dosa Menu Cards</h2>
+        <p style="font-size:13px; color:var(--text-muted); margin-top:4px">Click on any menu card to open Fullscreen Zoom view for fast reading & booking!</p>
+      </div>
+
+      <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap:28px;">
+        
+        <!-- Full HD Official Menu Card -->
+        <div style="background:var(--card-bg); border:1px solid var(--card-border); border-radius:16px; padding:20px; text-align:center; transition:var(--transition); position:relative" class="menu-card-item">
+          <div style="position:relative; cursor:pointer; overflow:hidden; border-radius:12px;" onclick="openMenuLightbox('menu-card-hd.jpg')">
+            <img src="menu-card-hd.jpg" alt="Official Full HD Menu Card" style="width:100%; height:auto; display:block; border-radius:12px; box-shadow:0 8px 30px rgba(0,0,0,0.6); transition:transform 0.4s ease">
+            <div style="position:absolute; inset:0; background:rgba(0,0,0,0.5); display:flex; align-items:center; justify-content:center; opacity:0; transition:opacity 0.3s ease; border-radius:12px" class="overlay-zoom">
+              <span style="background:var(--gold-accent); color:#000; font-weight:800; font-size:13px; padding:10px 22px; border-radius:30px; box-shadow:0 4px 20px rgba(0,0,0,0.5)"><i class="fa-solid fa-magnifying-glass-plus"></i> CLICK TO ZOOM</span>
+            </div>
+          </div>
+          <div style="font-weight:800; color:var(--gold-accent); margin-top:16px; font-size:16px"><i class="fa-solid fa-book-open"></i> Full HD Official Menu</div>
+          <div style="display:flex; gap:10px; margin-top:12px">
+            <button onclick="openMenuLightbox('menu-card-hd.jpg')" class="btn-outline-gold" style="flex:1; justify-content:center; padding:10px; font-size:13px"><i class="fa-solid fa-expand"></i> ZOOM MENU</button>
+            <button onclick="openOrderDrawer()" class="add-order-btn" style="flex:1; justify-content:center; padding:10px; font-size:13px"><i class="fa-solid fa-bolt"></i> QUICK ORDER</button>
+          </div>
+        </div>
+
+        <!-- Red Edition Card -->
+        <div style="background:var(--card-bg); border:1px solid var(--card-border); border-radius:16px; padding:20px; text-align:center; transition:var(--transition); position:relative" class="menu-card-item">
+          <div style="position:relative; cursor:pointer; overflow:hidden; border-radius:12px;" onclick="openMenuLightbox('menu-card-red.jpg')">
+            <img src="menu-card-red.jpg" alt="The Shahi Dosa Royal Red Menu Card" style="width:100%; height:auto; display:block; border-radius:12px; box-shadow:0 8px 30px rgba(0,0,0,0.6); transition:transform 0.4s ease">
+            <div style="position:absolute; inset:0; background:rgba(0,0,0,0.5); display:flex; align-items:center; justify-content:center; opacity:0; transition:opacity 0.3s ease; border-radius:12px" class="overlay-zoom">
+              <span style="background:var(--gold-accent); color:#000; font-weight:800; font-size:13px; padding:10px 22px; border-radius:30px; box-shadow:0 4px 20px rgba(0,0,0,0.5)"><i class="fa-solid fa-magnifying-glass-plus"></i> CLICK TO ZOOM</span>
+            </div>
+          </div>
+          <div style="font-weight:800; color:var(--gold-accent); margin-top:16px; font-size:16px"><i class="fa-solid fa-book-open"></i> Royal Red Edition</div>
+          <div style="display:flex; gap:10px; margin-top:12px">
+            <button onclick="openMenuLightbox('menu-card-red.jpg')" class="btn-outline-gold" style="flex:1; justify-content:center; padding:10px; font-size:13px"><i class="fa-solid fa-expand"></i> ZOOM MENU</button>
+            <button onclick="openOrderDrawer()" class="add-order-btn" style="flex:1; justify-content:center; padding:10px; font-size:13px"><i class="fa-solid fa-bolt"></i> QUICK ORDER</button>
+          </div>
+        </div>
+
+        <!-- Black Gold Edition Card -->
+        <div style="background:var(--card-bg); border:1px solid var(--card-border); border-radius:16px; padding:20px; text-align:center; transition:var(--transition); position:relative" class="menu-card-item">
+          <div style="position:relative; cursor:pointer; overflow:hidden; border-radius:12px;" onclick="openMenuLightbox('menu-card-black.jpg')">
+            <img src="menu-card-black.jpg" alt="The Shahi Dosa Premium Black Gold Menu Card" style="width:100%; height:auto; display:block; border-radius:12px; box-shadow:0 8px 30px rgba(0,0,0,0.6); transition:transform 0.4s ease">
+            <div style="position:absolute; inset:0; background:rgba(0,0,0,0.5); display:flex; align-items:center; justify-content:center; opacity:0; transition:opacity 0.3s ease; border-radius:12px" class="overlay-zoom">
+              <span style="background:var(--gold-accent); color:#000; font-weight:800; font-size:13px; padding:10px 22px; border-radius:30px; box-shadow:0 4px 20px rgba(0,0,0,0.5)"><i class="fa-solid fa-magnifying-glass-plus"></i> CLICK TO ZOOM</span>
+            </div>
+          </div>
+          <div style="font-weight:800; color:var(--gold-accent); margin-top:16px; font-size:16px"><i class="fa-solid fa-crown"></i> Shahi Gold Edition</div>
+          <div style="display:flex; gap:10px; margin-top:12px">
+            <button onclick="openMenuLightbox('menu-card-black.jpg')" class="btn-outline-gold" style="flex:1; justify-content:center; padding:10px; font-size:13px"><i class="fa-solid fa-expand"></i> ZOOM MENU</button>
+            <button onclick="openOrderDrawer()" class="add-order-btn" style="flex:1; justify-content:center; padding:10px; font-size:13px"><i class="fa-solid fa-bolt"></i> QUICK ORDER</button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
     </section>
 
     <!-- Interactive Food Menu Catalog Section -->
