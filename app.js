@@ -375,3 +375,18 @@ function closeMenuLightbox() {
   const modal = document.getElementById("menuLightboxModal");
   if (modal) modal.style.display = "none";
 }
+
+// Dedicated Official Menu Card Modal Controller
+function openOfficialMenuModal() {
+  const modal = document.getElementById("officialMenuModalBackdrop");
+  if (modal) {
+    modal.style.display = "flex";
+  }
+}
+
+function closeOfficialMenuModal() {
+  const modal = document.getElementById("officialMenuModalBackdrop");
+  if (modal) {
+    modal.style.display = "none";
+  }
+}
