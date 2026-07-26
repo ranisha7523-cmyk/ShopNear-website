@@ -579,77 +579,122 @@
   <script src="shared.js"></script>
 
   <script>
-    /* ===================== CINEMATIC HERO SLIDER ===================== */
-    let cineIndex = 0;
-    const cineSlides = document.querySelectorAll('.cine-slide');
-    const cineDots   = document.querySelectorAll('.cine-dot');
-    const cineCounter = document.getElementById('cineCounter');
+    document.addEventListener('DOMContentLoaded', () => {
+      /* ===================== CINEMATIC HERO SLIDER ===================== */
+      let cineIndex = 0;
+      const cineSlides = document.querySelectorAll('.cine-slide');
+      const cineDots   = document.querySelectorAll('.cine-dot');
+      const cineCounter = document.getElementById('cineCounter');
 
-    function setCineSlide(idx) {
-      cineSlides.forEach(s => s.classList.remove('active'));
-      cineDots.forEach(d => d.classList.remove('active'));
-      cineIndex = idx;
-      cineSlides[cineIndex].classList.add('active');
-      cineDots[cineIndex].classList.add('active');
-      cineCounter.textContent = `${cineIndex + 1} / ${cineSlides.length}`;
-    }
+      window.setCineSlide = function(idx) {
+        if (!cineSlides || cineSlides.length === 0) return;
+        cineSlides.forEach(s => s.classList.remove('active'));
+        cineDots.forEach(d => d.classList.remove('active'));
+        cineIndex = idx % cineSlides.length;
+        if (cineSlides[cineIndex]) cineSlides[cineIndex].classList.add('active');
+        if (cineDots[cineIndex]) cineDots[cineIndex].classList.add('active');
+        if (cineCounter) cineCounter.textContent = `${cineIndex + 1} / ${cineSlides.length}`;
+      };
 
-    setInterval(() => setCineSlide((cineIndex + 1) % cineSlides.length), 5000);
-
-    /* ===================== STAR PARTICLES ===================== */
-    const starContainer = document.getElementById('starContainer');
-    for (let i = 0; i < 40; i++) {
-      const star = document.createElement('div');
-      star.className = 'star-particle';
-      star.style.left = Math.random() * 100 + '%';
-      star.style.top  = Math.random() * 100 + '%';
-      star.style.animationDuration = (2 + Math.random() * 3) + 's';
-      star.style.animationDelay   = (Math.random() * 3) + 's';
-      star.style.width = star.style.height = (Math.random() < 0.3 ? 4 : 2) + 'px';
-      starContainer.appendChild(star);
-    }
-
-    /* ===================== RAIN ANIMATION ===================== */
-    const rainContainer = document.getElementById('rainContainer');
-    for (let i = 0; i < 60; i++) {
-      const drop = document.createElement('div');
-      drop.className = 'rain-drop';
-      drop.style.left = Math.random() * 100 + '%';
-      drop.style.height = (15 + Math.random() * 25) + 'px';
-      drop.style.animationDuration = (0.6 + Math.random() * 0.8) + 's';
-      drop.style.animationDelay   = (Math.random() * 2) + 's';
-      rainContainer.appendChild(drop);
-    }
-
-    /* Floating Sawan petals / symbols */
-    const sawanSymbols = ['🍃', '🌿', '🪷', '💧', '🌸', '🍀'];
-    for (let i = 0; i < 12; i++) {
-      const petal = document.createElement('div');
-      petal.className = 'sawan-petal';
-      petal.textContent = sawanSymbols[Math.floor(Math.random() * sawanSymbols.length)];
-      petal.style.left = Math.random() * 100 + '%';
-      petal.style.animationDuration = (4 + Math.random() * 5) + 's';
-      petal.style.animationDelay   = (Math.random() * 4) + 's';
-      petal.style.fontSize = (14 + Math.random() * 12) + 'px';
-      rainContainer.appendChild(petal);
-    }
-
-    /* ===================== DEALS COUNTDOWN TIMER ===================== */
-    let totalSeconds = 14 * 3600 + 22 * 60 + 45;
-    setInterval(() => {
-      if (totalSeconds > 0) {
-        totalSeconds--;
-        const h = Math.floor(totalSeconds / 3600);
-        const m = Math.floor((totalSeconds % 3600) / 60);
-        const s = totalSeconds % 60;
-        document.getElementById('dealTimer').textContent =
-          `${h}h : ${m < 10 ? '0' + m : m}m : ${s < 10 ? '0' + s : s}s`;
+      if (cineSlides && cineSlides.length > 0) {
+        setInterval(() => {
+          setCineSlide((cineIndex + 1) % cineSlides.length);
+        }, 5000);
       }
-    }, 1000);
+
+      /* ===================== STAR PARTICLES ===================== */
+      const starContainer = document.getElementById('starContainer');
+      if (starContainer) {
+        for (let i = 0; i < 30; i++) {
+          const star = document.createElement('div');
+          star.className = 'star-particle';
+          star.style.left = Math.random() * 100 + '%';
+          star.style.top  = Math.random() * 100 + '%';
+          star.style.animationDuration = (2 + Math.random() * 3) + 's';
+          star.style.animationDelay   = (Math.random() * 3) + 's';
+          star.style.width = star.style.height = (Math.random() < 0.3 ? 4 : 2) + 'px';
+          starContainer.appendChild(star);
+        }
+      }
+
+      /* ===================== RAIN ANIMATION ===================== */
+      const rainContainer = document.getElementById('rainContainer');
+      if (rainContainer) {
+        for (let i = 0; i < 30; i++) {
+          const drop = document.createElement('div');
+          drop.className = 'rain-drop';
+          drop.style.left = Math.random() * 100 + '%';
+          drop.style.height = (15 + Math.random() * 25) + 'px';
+          drop.style.animationDuration = (0.6 + Math.random() * 0.8) + 's';
+          drop.style.animationDelay   = (Math.random() * 2) + 's';
+          rainContainer.appendChild(drop);
+        }
+
+        const sawanSymbols = ['🍃', '🌿', '🪷', '💧', '🌸', '🍀'];
+        for (let i = 0; i < 8; i++) {
+          const petal = document.createElement('div');
+          petal.className = 'sawan-petal';
+          petal.textContent = sawanSymbols[Math.floor(Math.random() * sawanSymbols.length)];
+          petal.style.left = Math.random() * 100 + '%';
+          petal.style.animationDuration = (4 + Math.random() * 5) + 's';
+          petal.style.animationDelay   = (Math.random() * 4) + 's';
+          petal.style.fontSize = (14 + Math.random() * 12) + 'px';
+          rainContainer.appendChild(petal);
+        }
+      }
+
+      /* ===================== DEALS COUNTDOWN TIMER ===================== */
+      let totalSeconds = 14 * 3600 + 22 * 60 + 45;
+      const timerEl = document.getElementById('dealTimer');
+      if (timerEl) {
+        setInterval(() => {
+          if (totalSeconds > 0) {
+            totalSeconds--;
+            const h = Math.floor(totalSeconds / 3600);
+            const m = Math.floor((totalSeconds % 3600) / 60);
+            const s = totalSeconds % 60;
+            timerEl.textContent = `${h}h : ${m < 10 ? '0' + m : m}m : ${s < 10 ? '0' + s : s}s`;
+          }
+        }, 1000);
+      }
+
+      /* ===================== POPULATE GRIDS ===================== */
+      if (typeof PRODUCTS !== 'undefined' && Array.isArray(PRODUCTS)) {
+        // Sawan
+        const sawanGrid = document.getElementById('sawanGrid');
+        if (sawanGrid) {
+          const sawanProducts = PRODUCTS.filter(p => p.category === 'Sawan Special');
+          sawanGrid.innerHTML = sawanProducts.length > 0
+            ? sawanProducts.map(createSawanCardHTML).join('')
+            : '<div style="color:#86efac; padding:20px; font-size:14px">More Sawan special products coming soon! 🌿</div>';
+        }
+
+        // Deals of the Day (top 4 by discount)
+        const dealsGrid = document.getElementById('dealsGrid');
+        if (dealsGrid) {
+          const deals = [...PRODUCTS].sort((a, b) => b.discount - a.discount).slice(0, 4);
+          dealsGrid.innerHTML = deals.map(createProductCardHTML).join('');
+        }
+
+        // Electronics
+        const electronicsGrid = document.getElementById('electronicsGrid');
+        if (electronicsGrid) {
+          const electronics = PRODUCTS.filter(p => p.category === 'Electronics' || p.category === 'Mobiles').slice(0, 4);
+          electronicsGrid.innerHTML = electronics.map(createProductCardHTML).join('');
+        }
+
+        // Avengers
+        const avengersGrid = document.getElementById('avengersGrid');
+        if (avengersGrid) {
+          const avengers = PRODUCTS.filter(p => p.category === 'Avengers Special');
+          avengersGrid.innerHTML = avengers.map(createProductCardHTML).join('');
+        }
+      }
+    });
 
     /* ===================== PRODUCT CARD RENDERER ===================== */
     function createProductCardHTML(product) {
-      const wishlist = getWishlist();
+      const wishlist = typeof getWishlist === 'function' ? getWishlist() : [];
       const isWishlisted = wishlist.includes(product.id);
       return `
         <div class="product-card">
@@ -662,12 +707,12 @@
           <div class="product-title" onclick="window.location.href='product-detail.html?id=${product.id}'">${product.name}</div>
           <div class="rating-row">
             <div class="rating-badge">${product.rating} <i class="fa-solid fa-star" style="font-size:10px"></i></div>
-            <div class="rating-count">(${product.ratingCount.toLocaleString()})</div>
+            <div class="rating-count">(${product.ratingCount ? product.ratingCount.toLocaleString() : 0})</div>
             ${product.isAssured ? `<span class="verified-badge"><i class="fa-solid fa-circle-check"></i> Verified</span>` : ''}
           </div>
           <div class="price-row">
-            <div class="current-price">${formatPrice(product.price)}</div>
-            <div class="original-price">${formatPrice(product.originalPrice)}</div>
+            <div class="current-price">${typeof formatPrice === 'function' ? formatPrice(product.price) : '₹' + product.price}</div>
+            <div class="original-price">${typeof formatPrice === 'function' ? formatPrice(product.originalPrice) : '₹' + product.originalPrice}</div>
             <div class="discount-tag">${product.discount}% off</div>
           </div>
           <div class="card-actions">
@@ -683,7 +728,7 @@
         <div class="sawan-card" onclick="window.location.href='product-detail.html?id=${product.id}'">
           <img class="sawan-card-img" src="${product.image}" alt="${product.name}">
           <div class="sawan-card-title">${product.name}</div>
-          <div class="sawan-card-price">${formatPrice(product.price)}</div>
+          <div class="sawan-card-price">${typeof formatPrice === 'function' ? formatPrice(product.price) : '₹' + product.price}</div>
           <div class="sawan-card-discount">${product.discount}% off | Use SAWAN30 for extra 30%</div>
           <button class="sawan-card-btn" onclick="event.stopPropagation(); addToCart('${product.id}')">
             <i class="fa-solid fa-cart-shopping"></i> ADD TO CART
@@ -691,62 +736,6 @@
         </div>
       `;
     }
-
-    /* ===================== SCROLL REVEAL OBSERVER ===================== */
-    function initScrollReveal() {
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry, i) => {
-          if (entry.isIntersecting) {
-            setTimeout(() => {
-              entry.target.classList.add('visible');
-            }, entry.target.dataset.delay || 0);
-            observer.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.1 });
-
-      document.querySelectorAll('.section-card').forEach(el => observer.observe(el));
-
-      // Stagger product cards
-      const cardObserver = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            const cards = entry.target.querySelectorAll('.product-card');
-            cards.forEach((card, i) => {
-              setTimeout(() => card.classList.add('visible'), i * 100);
-            });
-            cardObserver.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.1 });
-
-      document.querySelectorAll('.products-grid, .sawan-grid').forEach(el => cardObserver.observe(el));
-    }
-
-    /* ===================== POPULATE GRIDS ===================== */
-    document.addEventListener('DOMContentLoaded', () => {
-      // Sawan
-      const sawanProducts = PRODUCTS.filter(p => p.category === 'Sawan Special');
-      document.getElementById('sawanGrid').innerHTML =
-        sawanProducts.length > 0
-          ? sawanProducts.map(createSawanCardHTML).join('')
-          : '<div style="color:#86efac; padding:20px; font-size:14px">More Sawan special products coming soon! 🌿</div>';
-
-      // Deals of the Day (top 4 by discount)
-      const deals = [...PRODUCTS].sort((a, b) => b.discount - a.discount).slice(0, 4);
-      document.getElementById('dealsGrid').innerHTML = deals.map(createProductCardHTML).join('');
-
-      // Electronics
-      const electronics = PRODUCTS.filter(p => p.category === 'Electronics' || p.category === 'Mobiles').slice(0, 4);
-      document.getElementById('electronicsGrid').innerHTML = electronics.map(createProductCardHTML).join('');
-
-      // Avengers
-      const avengers = PRODUCTS.filter(p => p.category === 'Avengers Special');
-      document.getElementById('avengersGrid').innerHTML = avengers.map(createProductCardHTML).join('');
-
-      // Trigger scroll reveal
-      initScrollReveal();
-    });
   </script>
 </body>
 </html>
