@@ -1,4 +1,4 @@
-// The Shahi Dosa - Official Menu Dataset (Real Dishes Verified)
+// The Shahi Dosa - Official Menu Dataset with HD Dish Images
 const RESTAURANT_INFO = {
   name: "The Shahi Dosa",
   tagline: "Royal Taste, Memorable Every Time",
@@ -52,7 +52,7 @@ const MENU_ITEMS = [
     price: 119,
     isVeg: true,
     isPopular: true,
-    image: "dish-dosa-real.jpg",
+    image: "https://images.unsplash.com/photo-1668236543090-82eba5ee5976?auto=format&fit=crop&w=600&q=80",
     description: "Indo-Chinese fusion Dosa layered with fiery Schezwan sauce and potato masala."
   },
   {
@@ -62,7 +62,7 @@ const MENU_ITEMS = [
     price: 119,
     isVeg: true,
     isPopular: true,
-    image: "dish-dosa-real.jpg",
+    image: "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?auto=format&fit=crop&w=600&q=80",
     description: "Crispy Dosa lined with fiery Mysore red garlic paste & potato masala."
   },
   {
@@ -82,7 +82,7 @@ const MENU_ITEMS = [
     price: 139,
     isVeg: true,
     isPopular: false,
-    image: "dish-dosa-real.jpg",
+    image: "https://images.unsplash.com/photo-1668236543090-82eba5ee5976?auto=format&fit=crop&w=600&q=80",
     description: "Combination of spicy Mysore chutney paste & rich Paneer filling."
   },
   {
@@ -92,7 +92,7 @@ const MENU_ITEMS = [
     price: 139,
     isVeg: true,
     isPopular: false,
-    image: "dish-dosa-real.jpg",
+    image: "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?auto=format&fit=crop&w=600&q=80",
     description: "Fiery Schezwan kick paired with soft paneer chunks inside a golden Dosa."
   },
   {
@@ -102,7 +102,7 @@ const MENU_ITEMS = [
     price: 159,
     isVeg: true,
     isPopular: true,
-    image: "dish-dosa-real.jpg",
+    image: "https://images.unsplash.com/photo-1668236543090-82eba5ee5976?auto=format&fit=crop&w=600&q=80",
     description: "Loaded with melted mozzarella cheese & spiced paneer chunks."
   },
   {
@@ -112,7 +112,7 @@ const MENU_ITEMS = [
     price: 129,
     isVeg: true,
     isPopular: false,
-    image: "dish-dosa-real.jpg",
+    image: "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?auto=format&fit=crop&w=600&q=80",
     description: "Net-textured ultra-crispy Semolina (Rawa) Dosa infused with peppercorns & cumin."
   },
   {
@@ -122,7 +122,7 @@ const MENU_ITEMS = [
     price: 139,
     isVeg: true,
     isPopular: true,
-    image: "dish-dosa-real.jpg",
+    image: "https://images.unsplash.com/photo-1668236543090-82eba5ee5976?auto=format&fit=crop&w=600&q=80",
     description: "Crispy Rawa Dosa stuffed with flavorful potato masala."
   },
   {
@@ -132,7 +132,7 @@ const MENU_ITEMS = [
     price: 149,
     isVeg: true,
     isPopular: false,
-    image: "dish-dosa-real.jpg",
+    image: "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?auto=format&fit=crop&w=600&q=80",
     description: "Lacy Rawa Dosa stuffed with generous spiced paneer filling."
   },
   {
@@ -142,7 +142,7 @@ const MENU_ITEMS = [
     price: 159,
     isVeg: true,
     isPopular: true,
-    image: "dish-dosa-real.jpg",
+    image: "https://images.unsplash.com/photo-1668236543090-82eba5ee5976?auto=format&fit=crop&w=600&q=80",
     description: "The ultimate Rawa Dosa loaded with gooey melted cheese & seasoned paneer."
   },
 
@@ -174,7 +174,7 @@ const MENU_ITEMS = [
     price: 109,
     isVeg: true,
     isPopular: false,
-    image: "dish-uttapam-real.jpg",
+    image: "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?auto=format&fit=crop&w=600&q=80",
     description: "Topped with juicy ripe tomatoes and herbs."
   },
   {
@@ -226,7 +226,7 @@ const MENU_ITEMS = [
     price: 89,
     isVeg: true,
     isPopular: true,
-    image: "dish-idli-real.jpg",
+    image: "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?auto=format&fit=crop&w=600&q=80",
     description: "Crispy fried lentil donuts soaked in hot Sambhar."
   },
   {
@@ -270,7 +270,7 @@ const MENU_ITEMS = [
     price: 49,
     isVeg: true,
     isPopular: false,
-    image: "https://images.unsplash.com/photo-1509722747041-616f39b57569?auto=format&fit=crop&w=600&q=80",
+    image: "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?auto=format&fit=crop&w=600&q=80",
     description: "Triple decker sandwich stuffed with cucumbers, tomatoes & green chutney."
   },
   {
@@ -302,7 +302,7 @@ const MENU_ITEMS = [
     price: 49,
     isVeg: true,
     isPopular: true,
-    image: "https://images.unsplash.com/photo-1612927601601-6638404737ce?auto=format&fit=crop&w=600&q=80",
+    image: "https://images.unsplash.com/photo-1569718212165-3a8278d5f624?auto=format&fit=crop&w=600&q=80",
     description: "Maggi noodles tossed with peas, carrots, onions & spices."
   },
 
