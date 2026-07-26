@@ -77,18 +77,20 @@
     }
 
     .header-container {
-      max-width: 1280px;
+      max-width: 1380px;
       margin: 0 auto;
-      padding: 14px 24px;
+      padding: 10px 20px;
       display: flex;
       align-items: center;
       justify-content: space-between;
+      gap: 16px;
     }
 
     .brand-block {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
+      flex-shrink: 0;
     }
 
     .brand-icon {
@@ -97,7 +99,7 @@
     }
 
     .brand-text h1 {
-      font-size: 24px;
+      font-size: 22px;
       font-weight: 800;
       background: linear-gradient(135deg, #ffffff 40%, var(--gold-accent));
       -webkit-background-clip: text;
@@ -106,7 +108,7 @@
     }
 
     .brand-text span {
-      font-size: 11px;
+      font-size: 10px;
       color: var(--gold-accent);
       letter-spacing: 1px;
       text-transform: uppercase;
@@ -120,23 +122,26 @@
       background: rgba(22, 163, 74, 0.15);
       border: 1px solid var(--veg-green);
       color: var(--veg-green);
-      font-size: 11px;
+      font-size: 10px;
       font-weight: 800;
-      padding: 2px 8px;
+      padding: 3px 6px;
       border-radius: 4px;
-      margin-left: 8px;
+      flex-shrink: 0;
+      white-space: nowrap;
     }
 
     .header-nav {
       display: flex;
       align-items: center;
-      gap: 24px;
+      gap: 16px;
+      white-space: nowrap;
     }
 
     .nav-link {
-      font-size: 14px;
+      font-size: 13px;
       font-weight: 600;
       color: var(--text-muted);
+      white-space: nowrap;
       transition: var(--transition);
     }
 
@@ -147,7 +152,8 @@
     .header-actions {
       display: flex;
       align-items: center;
-      gap: 16px;
+      gap: 12px;
+      flex-shrink: 0;
     }
 
     .cart-icon-btn {
@@ -1020,34 +1026,26 @@
         <button class="auth-tab-btn" id="tabBtnSignUp" onclick="switchAuthTab('signup')">Sign Up</button>
       </div>
 
-      <!-- Sign In Form -->
+      <!-- Sign In Form (Simple - No Password) -->
       <form id="formSignIn" onsubmit="handleSignIn(event)" style="padding:24px">
-        <div style="margin-bottom:16px" class="form-group-custom">
-          <label>Email Address / Phone Number</label>
-          <input type="text" id="signinEmail" placeholder="your@email.com or +91..." required>
-        </div>
         <div style="margin-bottom:20px" class="form-group-custom">
-          <label>Password</label>
-          <input type="password" id="signinPassword" placeholder="••••••••" required>
+          <label>Mobile Number or Email Address</label>
+          <input type="text" id="signinEmail" placeholder="Enter Phone (+91 92055...) or Email" required>
         </div>
-        <button type="submit" class="btn-primary-gold" style="width:100%; justify-content:center; padding:12px; font-size:14px">SIGN IN TO YOUR ACCOUNT</button>
+        <button type="submit" class="btn-primary-gold" style="width:100%; justify-content:center; padding:12px; font-size:14px"><i class="fa-solid fa-arrow-right-to-bracket"></i> CONTINUE TO SIGN IN</button>
       </form>
 
-      <!-- Sign Up Form -->
+      <!-- Sign Up Form (Simple - No Password) -->
       <form id="formSignUp" onsubmit="handleSignUp(event)" style="padding:24px; display:none">
         <div style="margin-bottom:14px" class="form-group-custom">
           <label>Full Name</label>
-          <input type="text" id="signupName" placeholder="Rohan Sharma" required>
-        </div>
-        <div style="margin-bottom:14px" class="form-group-custom">
-          <label>Email Address</label>
-          <input type="email" id="signupEmail" placeholder="rohan@example.com" required>
+          <input type="text" id="signupName" placeholder="Enter Your Name" required>
         </div>
         <div style="margin-bottom:20px" class="form-group-custom">
-          <label>Create Password</label>
-          <input type="password" id="signupPassword" placeholder="••••••••" required>
+          <label>Mobile Number or Email</label>
+          <input type="text" id="signupEmail" placeholder="Enter Phone (+91 92055...) or Email" required>
         </div>
-        <button type="submit" class="btn-primary-gold" style="width:100%; justify-content:center; padding:12px; font-size:14px">CREATE NEW ACCOUNT</button>
+        <button type="submit" class="btn-primary-gold" style="width:100%; justify-content:center; padding:12px; font-size:14px"><i class="fa-solid fa-user-plus"></i> CREATE ACCOUNT & CONTINUE</button>
       </form>
     </div>
   </div>
