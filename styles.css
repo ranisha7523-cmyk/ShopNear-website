@@ -60,10 +60,75 @@ img {
   position: sticky;
   top: 0;
   z-index: 1000;
-  background: rgba(13, 11, 18, 0.85);
+  background: rgba(13, 11, 18, 0.95);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border-bottom: 1px solid var(--card-border);
+  transition: all 0.3s ease;
+}
+
+.shahi-header.scrolled {
+  background: rgba(13, 11, 18, 0.7) !important;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+  box-shadow: 0 6px 24px rgba(0,0,0,0.7);
+  border-bottom-color: rgba(245, 158, 11, 0.3);
+}
+
+/* Auth Modal Styles */
+.auth-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(8px);
+  z-index: 2500;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.auth-modal-backdrop.active {
+  display: flex;
+}
+
+.auth-modal-card {
+  background: #161320;
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-lg);
+  width: 100%;
+  max-width: 420px;
+  overflow: hidden;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.6);
+  animation: modalPop 0.3s ease;
+}
+
+@keyframes modalPop {
+  from { transform: scale(0.9); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+.auth-tabs {
+  display: flex;
+  background: rgba(0,0,0,0.3);
+  border-bottom: 1px solid var(--card-border);
+}
+
+.auth-tab-btn {
+  flex: 1;
+  padding: 14px;
+  font-weight: 700;
+  font-size: 14px;
+  background: none;
+  color: var(--text-muted);
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+}
+
+.auth-tab-btn.active {
+  color: var(--gold-accent);
+  border-bottom-color: var(--gold-accent);
+  background: rgba(245, 158, 11, 0.05);
 }
 
 .header-container {

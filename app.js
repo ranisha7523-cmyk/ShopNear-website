@@ -257,12 +257,100 @@ function renderReviews() {
   `).join('');
 }
 
+// Auth State Management
+let shahiUser = JSON.parse(localStorage.getItem("shahi_user") || "null");
+
+function updateAuthUI() {
+  const authContainer = document.getElementById("headerAuthBtn");
+  if (!authContainer) return;
+
+  if (shahiUser) {
+    authContainer.innerHTML = `
+      <div style="display:flex; align-items:center; gap:8px">
+        <span style="font-size:13px; font-weight:700; color:var(--gold-accent)"><i class="fa-solid fa-user-crown"></i> ${shahiUser.name}</span>
+        <button onclick="logoutUser()" style="background:rgba(255,255,255,0.1); color:#fff; border-radius:20px; padding:4px 10px; font-size:11px; font-weight:700" title="Sign Out">Logout</button>
+      </div>
+    `;
+  } else {
+    authContainer.innerHTML = `
+      <button onclick="openAuthModal('signin')" style="background:rgba(245,158,11,0.15); border:1px solid var(--card-border); color:var(--gold-accent); font-weight:700; font-size:13px; padding:8px 16px; border-radius:20px; cursor:pointer">
+        <i class="fa-regular fa-user"></i> Sign In / Sign Up
+      </button>
+    `;
+  }
+}
+
+function openAuthModal(mode = 'signin') {
+  const modal = document.getElementById("authModalBackdrop");
+  if (modal) {
+    switchAuthTab(mode);
+    modal.classList.add("active");
+  }
+}
+
+function closeAuthModal() {
+  const modal = document.getElementById("authModalBackdrop");
+  if (modal) modal.classList.remove("active");
+}
+
+function switchAuthTab(mode) {
+  const signinBtn = document.getElementById("tabBtnSignIn");
+  const signupBtn = document.getElementById("tabBtnSignUp");
+  const signinForm = document.getElementById("formSignIn");
+  const signupForm = document.getElementById("formSignUp");
+
+  if (mode === 'signin') {
+    if (signinBtn) signinBtn.classList.add("active");
+    if (signupBtn) signupBtn.classList.remove("active");
+    if (signinForm) signinForm.style.display = "block";
+    if (signupForm) signupForm.style.display = "none";
+  } else {
+    if (signupBtn) signupBtn.classList.add("active");
+    if (signinBtn) signinBtn.classList.remove("active");
+    if (signupForm) signupForm.style.display = "block";
+    if (signinForm) signinForm.style.display = "none";
+  }
+}
+
+function handleSignIn(e) {
+  e.preventDefault();
+  const email = document.getElementById("signinEmail").value.trim();
+  if (email) {
+    shahiUser = { name: email.split('@')[0], email: email };
+    localStorage.setItem("shahi_user", JSON.stringify(shahiUser));
+    updateAuthUI();
+    closeAuthModal();
+    showToast(`Welcome back, ${shahiUser.name}! 👑`);
+  }
+}
+
+function handleSignUp(e) {
+  e.preventDefault();
+  const name = document.getElementById("signupName").value.trim();
+  const email = document.getElementById("signupEmail").value.trim();
+  if (name && email) {
+    shahiUser = { name: name, email: email };
+    localStorage.setItem("shahi_user", JSON.stringify(shahiUser));
+    updateAuthUI();
+    closeAuthModal();
+    showToast(`Welcome to The Shahi Dosa, ${name}! 🪷`);
+  }
+}
+
+function logoutUser() {
+  shahiUser = null;
+  localStorage.removeItem("shahi_user");
+  updateAuthUI();
+  showToast("Logged out successfully");
+}
+
 // DOM Initialization
 document.addEventListener("DOMContentLoaded", () => {
   renderCategoryPills();
   renderMenu();
   renderReviews();
   updateCartBadge();
+  updateAuthUI();
 
   // Search Bar Listener
   const searchInput = document.getElementById("menuSearchInput");
@@ -272,4 +360,16 @@ document.addEventListener("DOMContentLoaded", () => {
       renderMenu();
     });
   }
+
+  // Transparent Header Scroll Listener
+  window.addEventListener("scroll", function() {
+    const header = document.querySelector(".shahi-header");
+    if (header) {
+      if (window.scrollY > 20) {
+        header.classList.add("scrolled");
+      } else {
+        header.classList.remove("scrolled");
+      }
+    }
+  });
 });

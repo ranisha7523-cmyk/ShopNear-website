@@ -766,6 +766,8 @@
       </nav>
 
       <div class="header-actions">
+        <div id="headerAuthBtn"></div>
+
         <button class="cart-icon-btn" onclick="openOrderDrawer()" title="View Order Cart">
           <i class="fa-solid fa-basket-shopping"></i>
           <span class="cart-badge" style="display:none">0</span>
@@ -960,6 +962,51 @@
   <footer class="shahi-footer">
     <p>© 2026 The Shahi Dosa Restaurant. 100% Pure Veg • All Rights Reserved.</p>
   </footer>
+
+  <!-- Auth Modal (Sign In / Sign Up) -->
+  <div class="auth-modal-backdrop" id="authModalBackdrop" onclick="if(event.target===this) closeAuthModal()">
+    <div class="auth-modal-card">
+      <div style="background:var(--royal-maroon); padding:16px 20px; color:#fff; display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--card-border)">
+        <div style="font-size:16px; font-weight:800"><i class="fa-solid fa-crown" style="color:var(--gold-accent)"></i> The Shahi Dosa Account</div>
+        <button onclick="closeAuthModal()" style="background:none; color:#fff; font-size:18px"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+
+      <div class="auth-tabs">
+        <button class="auth-tab-btn active" id="tabBtnSignIn" onclick="switchAuthTab('signin')">Sign In</button>
+        <button class="auth-tab-btn" id="tabBtnSignUp" onclick="switchAuthTab('signup')">Sign Up</button>
+      </div>
+
+      <!-- Sign In Form -->
+      <form id="formSignIn" onsubmit="handleSignIn(event)" style="padding:24px">
+        <div style="margin-bottom:16px" class="form-group-custom">
+          <label>Email Address / Phone Number</label>
+          <input type="text" id="signinEmail" placeholder="your@email.com or +91..." required>
+        </div>
+        <div style="margin-bottom:20px" class="form-group-custom">
+          <label>Password</label>
+          <input type="password" id="signinPassword" placeholder="••••••••" required>
+        </div>
+        <button type="submit" class="btn-primary-gold" style="width:100%; justify-content:center; padding:12px; font-size:14px">SIGN IN TO YOUR ACCOUNT</button>
+      </form>
+
+      <!-- Sign Up Form -->
+      <form id="formSignUp" onsubmit="handleSignUp(event)" style="padding:24px; display:none">
+        <div style="margin-bottom:14px" class="form-group-custom">
+          <label>Full Name</label>
+          <input type="text" id="signupName" placeholder="Rohan Sharma" required>
+        </div>
+        <div style="margin-bottom:14px" class="form-group-custom">
+          <label>Email Address</label>
+          <input type="email" id="signupEmail" placeholder="rohan@example.com" required>
+        </div>
+        <div style="margin-bottom:20px" class="form-group-custom">
+          <label>Create Password</label>
+          <input type="password" id="signupPassword" placeholder="••••••••" required>
+        </div>
+        <button type="submit" class="btn-primary-gold" style="width:100%; justify-content:center; padding:12px; font-size:14px">CREATE NEW ACCOUNT</button>
+      </form>
+    </div>
+  </div>
 
   <!-- Scripts -->
   <script src="menu-data.js"></script>
