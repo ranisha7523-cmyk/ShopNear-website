@@ -832,26 +832,52 @@
     </section>
 
     <!-- Official Restaurant Menu Card Showcase Section -->
-    <section id="officialMenuCard" style="max-width:900px; margin:50px auto; padding:0 24px;">
+    <section id="officialMenuCard" style="max-width:1280px; margin:50px auto; padding:0 24px;">
       <div class="section-title-wrap">
         <p>AUTHENTIC RESTAURANT MENU</p>
-        <h2>Official Shahi Dosa Menu Card</h2>
-        <p style="font-size:13px; color:var(--text-muted); margin-top:4px">Click on the menu card image to view in Fullscreen HD Zoom!</p>
+        <h2>Official Shahi Dosa Menu Cards</h2>
+        <p style="font-size:13px; color:var(--text-muted); margin-top:4px">Click on any menu card to open Fullscreen Zoom view for fast reading & booking!</p>
       </div>
 
-      <!-- Single Crisp Full HD Official Menu Card -->
-      <div style="background:var(--card-bg); border:2px solid var(--gold-accent); border-radius:20px; padding:20px; text-align:center; box-shadow:0 12px 40px rgba(0,0,0,0.8)">
-        <div style="position:relative; cursor:pointer; overflow:hidden; border-radius:14px;" onclick="openMenuLightbox('menu-card-hd.jpg')">
-          <img src="menu-card-hd.jpg" alt="Official Full HD Menu Card" style="width:100%; height:auto; display:block; border-radius:14px; box-shadow:0 8px 30px rgba(0,0,0,0.7); filter:none !important">
+      <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap:28px;">
+        
+        <!-- Full HD Official Menu Card -->
+        <div style="background:var(--card-bg); border:1px solid var(--card-border); border-radius:16px; padding:20px; text-align:center; transition:var(--transition); position:relative" class="menu-card-item">
+          <div style="cursor:pointer; overflow:hidden; border-radius:12px;" onclick="openMenuLightbox('menu-card-hd.jpg')">
+            <img src="menu-card-hd.jpg" alt="Official Full HD Menu Card" style="width:100%; height:auto; display:block; border-radius:12px; box-shadow:0 8px 30px rgba(0,0,0,0.6); transition:transform 0.4s ease">
+          </div>
+          <div style="font-weight:800; color:var(--gold-accent); margin-top:16px; font-size:16px"><i class="fa-solid fa-book-open"></i> Full HD Official Menu</div>
+          <div style="display:flex; gap:10px; margin-top:12px">
+            <button onclick="openMenuLightbox('menu-card-hd.jpg')" class="btn-outline-gold" style="flex:1; justify-content:center; padding:10px; font-size:13px"><i class="fa-solid fa-expand"></i> ZOOM MENU</button>
+            <button onclick="openOrderDrawer()" class="add-order-btn" style="flex:1; justify-content:center; padding:10px; font-size:13px"><i class="fa-solid fa-bolt"></i> QUICK ORDER</button>
+          </div>
         </div>
 
-        <div style="display:flex; justify-content:center; gap:16px; margin-top:20px; flex-wrap:wrap">
-          <button onclick="openMenuLightbox('menu-card-hd.jpg')" class="btn-primary-gold" style="padding:12px 28px; font-size:14px"><i class="fa-solid fa-magnifying-glass-plus"></i> FULLSCREEN HD ZOOM</button>
-          <button onclick="openOrderDrawer()" class="btn-outline-gold" style="padding:12px 28px; font-size:14px"><i class="fa-solid fa-bolt"></i> QUICK ORDER NOW</button>
+        <!-- Red Edition Card -->
+        <div style="background:var(--card-bg); border:1px solid var(--card-border); border-radius:16px; padding:20px; text-align:center; transition:var(--transition); position:relative" class="menu-card-item">
+          <div style="cursor:pointer; overflow:hidden; border-radius:12px;" onclick="openMenuLightbox('menu-card-red.jpg')">
+            <img src="menu-card-red.jpg" alt="The Shahi Dosa Royal Red Menu Card" style="width:100%; height:auto; display:block; border-radius:12px; box-shadow:0 8px 30px rgba(0,0,0,0.6); transition:transform 0.4s ease">
+          </div>
+          <div style="font-weight:800; color:var(--gold-accent); margin-top:16px; font-size:16px"><i class="fa-solid fa-book-open"></i> Royal Red Edition</div>
+          <div style="display:flex; gap:10px; margin-top:12px">
+            <button onclick="openMenuLightbox('menu-card-red.jpg')" class="btn-outline-gold" style="flex:1; justify-content:center; padding:10px; font-size:13px"><i class="fa-solid fa-expand"></i> ZOOM MENU</button>
+            <button onclick="openOrderDrawer()" class="add-order-btn" style="flex:1; justify-content:center; padding:10px; font-size:13px"><i class="fa-solid fa-bolt"></i> QUICK ORDER</button>
+          </div>
         </div>
+
+        <!-- Black Gold Edition Card -->
+        <div style="background:var(--card-bg); border:1px solid var(--card-border); border-radius:16px; padding:20px; text-align:center; transition:var(--transition); position:relative" class="menu-card-item">
+          <div style="cursor:pointer; overflow:hidden; border-radius:12px;" onclick="openMenuLightbox('menu-card-black.jpg')">
+            <img src="menu-card-black.jpg" alt="The Shahi Dosa Premium Black Gold Menu Card" style="width:100%; height:auto; display:block; border-radius:12px; box-shadow:0 8px 30px rgba(0,0,0,0.6); transition:transform 0.4s ease">
+          </div>
+          <div style="font-weight:800; color:var(--gold-accent); margin-top:16px; font-size:16px"><i class="fa-solid fa-crown"></i> Shahi Gold Edition</div>
+          <div style="display:flex; gap:10px; margin-top:12px">
+            <button onclick="openMenuLightbox('menu-card-black.jpg')" class="btn-outline-gold" style="flex:1; justify-content:center; padding:10px; font-size:13px"><i class="fa-solid fa-expand"></i> ZOOM MENU</button>
+            <button onclick="openOrderDrawer()" class="add-order-btn" style="flex:1; justify-content:center; padding:10px; font-size:13px"><i class="fa-solid fa-bolt"></i> QUICK ORDER</button>
+          </div>
+        </div>
+
       </div>
-    </section>
-
     </section>
 
     <!-- Interactive Food Menu Catalog Section -->
@@ -1058,8 +1084,21 @@
         <button onclick="closeOfficialMenuModal()" style="background:none; color:#fff; font-size:24px; cursor:pointer"><i class="fa-solid fa-xmark"></i></button>
       </div>
 
-      <div style="text-align:center;">
-        <img src="menu-card-hd.jpg" alt="Official Full HD Menu Card" style="width:100%; max-width:800px; border-radius:12px; cursor:pointer; border:2px solid var(--gold-accent); box-shadow:0 8px 30px rgba(0,0,0,0.7); filter:none !important" onclick="openMenuLightbox('menu-card-hd.jpg')">
+      <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap:24px;">
+        <div style="text-align:center;">
+          <img src="menu-card-hd.jpg" alt="Official Full HD Menu Card" style="width:100%; border-radius:12px; cursor:pointer; border:1px solid var(--card-border); box-shadow:0 8px 24px rgba(0,0,0,0.5)" onclick="openMenuLightbox('menu-card-hd.jpg')">
+          <div style="font-weight:700; color:var(--gold-accent); margin-top:10px; font-size:15px">Full HD Official Menu</div>
+        </div>
+
+        <div style="text-align:center;">
+          <img src="menu-card-red.jpg" alt="Royal Shahi Menu Red" style="width:100%; border-radius:12px; cursor:pointer; border:1px solid var(--card-border); box-shadow:0 8px 24px rgba(0,0,0,0.5)" onclick="openMenuLightbox('menu-card-red.jpg')">
+          <div style="font-weight:700; color:var(--gold-accent); margin-top:10px; font-size:15px">Royal Red Edition</div>
+        </div>
+
+        <div style="text-align:center;">
+          <img src="menu-card-black.jpg" alt="Shahi Premium Menu Black" style="width:100%; border-radius:12px; cursor:pointer; border:1px solid var(--card-border); box-shadow:0 8px 24px rgba(0,0,0,0.5)" onclick="openMenuLightbox('menu-card-black.jpg')">
+          <div style="font-weight:700; color:var(--gold-accent); margin-top:10px; font-size:15px">Shahi Gold Edition</div>
+        </div>
       </div>
 
       <div style="margin-top:24px; text-align:center">
