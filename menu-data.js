@@ -8,7 +8,7 @@ const RESTAURANT_INFO = {
   phone: "+91 9205524160",
   whatsappNumber: "919205524160",
   address: "FLAT NO.- 83-A PKT, Pocket A-2, near Ryan International School, Pocket A 2, Mayur Vihar Phase III, Gharoli, Delhi, 110096",
-  hours: "8:00 AM - 11:00 PM (All Days)"
+  hours: "10:00 AM - 11:00 PM (All Days)"
 };
 
 const MENU_CATEGORIES = [
