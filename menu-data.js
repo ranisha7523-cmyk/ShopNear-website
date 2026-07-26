@@ -5,9 +5,9 @@ const RESTAURANT_INFO = {
   isPureVeg: true,
   rating: 4.9,
   reviewsCount: "1,240+",
-  phone: "+91 9876543210",
-  whatsappNumber: "919876543210",
-  address: "Shop No. 12, Royal Food Street, Main Market, Delhi",
+  phone: "+91 9205524160",
+  whatsappNumber: "919205524160",
+  address: "FLAT NO.- 83-A PKT, Pocket A-2, near Ryan International School, Pocket A 2, Mayur Vihar Phase III, Gharoli, Delhi, 110096",
   hours: "8:00 AM - 11:00 PM (All Days)"
 };
 
