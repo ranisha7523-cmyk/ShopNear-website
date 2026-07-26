@@ -792,7 +792,16 @@ img {
 }
 
 /* Responsive */
-/* Rich Animations & Glow Effects */
+/* Ultra-Crisp Unblurred Menu Cards */
+.menu-card-item img {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  filter: none !important;
+}
+.menu-card-item:hover img {
+  transform: scale(1.02);
+  box-shadow: 0 12px 40px rgba(245, 158, 11, 0.4);
+}
+
 .food-card {
   animation: cardFadeIn 0.5s ease backwards;
 }
@@ -816,6 +825,6 @@ img {
 }
 
 @keyframes heroLogoFloat {
-  0%, 100% { transform: translateY(0px) rotate(0deg); filter: drop-shadow(0 0 20px rgba(245,158,11,0.5)); }
-  50% { transform: translateY(-12px) rotate(1deg); filter: drop-shadow(0 0 35px rgba(245,158,11,0.8)); }
+  0%, 100% { transform: translateY(0px); filter: drop-shadow(0 0 20px rgba(245,158,11,0.5)); }
+  50% { transform: translateY(-10px); filter: drop-shadow(0 0 35px rgba(245,158,11,0.8)); }
 }
