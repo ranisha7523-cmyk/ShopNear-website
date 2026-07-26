@@ -361,15 +361,17 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Transparent Header Scroll Listener
-  window.addEventListener("scroll", function() {
-    const header = document.querySelector(".shahi-header");
-    if (header) {
-      if (window.scrollY > 20) {
-        header.classList.add("scrolled");
-      } else {
-        header.classList.remove("scrolled");
-      }
-    }
-  });
-});
+// Menu Lightbox Zoom Modal Functions
+function openMenuLightbox(src) {
+  const modal = document.getElementById("menuLightboxModal");
+  const img = document.getElementById("lightboxImg");
+  if (modal && img) {
+    img.src = src;
+    modal.style.display = "flex";
+  }
+}
+
+function closeMenuLightbox() {
+  const modal = document.getElementById("menuLightboxModal");
+  if (modal) modal.style.display = "none";
+}
